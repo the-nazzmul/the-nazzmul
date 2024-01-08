@@ -1,8 +1,8 @@
-Nazmul Hussain
-======================================================================================================================================
+# Nazmul Hussain
 
-Full-stack Developer
---------------------
+
+### Full-stack Developer
+
 
 Hello!! I am Nazmul Hussain. I am a Full-Stack Developer with expertise in HTML5, CSS3, JavaScript, TypeScript, React.js, Express.js, MongoDB. I am passionate about creating seamless web applications with a keen eye for design and functionality. Eager to contribute my skills in turning ideas into dynamic web solutions. I believe I don’t know everything, so each day gifts me the opportunity to learn something new and improve myself.
 
