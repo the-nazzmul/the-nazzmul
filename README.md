@@ -56,9 +56,9 @@
 </div>
 
 ###
-
-[![GitHub Streak](https://nirzak-streak-stats.vercel.app?user=the-nazzmul)](https://git.io/streak-stats)
-
+<div align="center">
+  [![GitHub Streak](https://nirzak-streak-stats.vercel.app?user=the-nazzmul)](https://git.io/streak-stats)
+</div>
 ###
 
 <br clear="both">
