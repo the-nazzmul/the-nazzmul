@@ -58,8 +58,11 @@
 ###
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=the-nazzmul&locale=en&mode=daily&theme=dracula&hide_border=false&border_radius=5&order=3" height="150" alt="streak graph"  />
+  <a href="https://git.io/streak-stats">
+    <img src="https://nirzak-streak-stats.vercel.app?user=the-nazzmul&theme=dark" alt="GitHub Streak" />
+  </a>
 </div>
+
 
 ###
 
