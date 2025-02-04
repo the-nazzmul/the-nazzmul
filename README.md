@@ -5,9 +5,25 @@
 
 <h1 align="left">Hello There..👋🏽 I am Nazmul Hussain!</h1>
 
+
 ###
 
-<h2 align="left">About me</h2>
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=the-nazzmul&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1" alt="stats graph"  />
+</div>
+
+###
+
+<div align="center">
+  <a href="https://git.io/streak-stats">
+    <img src="https://nirzak-streak-stats.vercel.app?user=the-nazzmul&theme=dark" alt="GitHub Streak" />
+  </a>
+</div>
+
+
+###
+
+<h2 align="center">About me</h2>
 
 ###
 
@@ -19,11 +35,10 @@
 
 ###
 
-<h2 align="left">I code with</h2>
+<h2 align="center">I code with</h2>
 
 ###
 
-<br clear="both">
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=js" height="40" alt="javascript logo"  />
@@ -49,22 +64,8 @@
   <img src="https://skillicons.dev/icons?i=py" height="40" alt="python logo"  />
 </div>
 
-###
 
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=the-nazzmul&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1" alt="stats graph"  />
-</div>
-
-###
-
-<div align="center">
-  <a href="https://git.io/streak-stats">
-    <img src="https://nirzak-streak-stats.vercel.app?user=the-nazzmul&theme=dark" alt="GitHub Streak" />
-  </a>
-</div>
-
-
-###
+<h2 align="center">Connect with me</h2>
 
 <br clear="both">
 
