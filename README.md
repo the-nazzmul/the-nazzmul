@@ -1,11 +1,6 @@
 ![I am GitHub Readme Generator's creator](https://raw.githubusercontent.com/the-nazzmul/the-nazzmul/refs/heads/main/nazmul-hussain.png)
 
 
-
-<div align="center">
-  <img height="600" src="https://raw.githubusercontent.com/the-nazzmul/the-nazzmul/refs/heads/main/nazmul-hussain.png"  />
-</div>
-
 ###
 
 <h1 align="left">Hello There..👋🏽 I am Nazmul Hussain!</h1>
@@ -62,9 +57,7 @@
 
 ###
 
-<div align="center">
-  [![GitHub Streak](https://nirzak-streak-stats.vercel.app?user=the-nazzmul)](https://git.io/streak-stats)
-</div>
+[![GitHub Streak](https://nirzak-streak-stats.vercel.app?user=the-nazzmul)](https://git.io/streak-stats)
 
 ###
 
