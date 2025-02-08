@@ -14,7 +14,7 @@
 ###
 
 <div align="center">
-  <a href="https://git.io/streak-stats"><img src="https://streak-stats.demolab.com?user=the-nazzmul?theme=dark&hide_border=false&count_private=true&include_all_commits=true"/></a>
+  <a href="https://git.io/streak-stats"><img src="https://streak-stats.demolab.com?user=the-nazzmul&theme=dark" alt="GitHub Streak" /></a>
 </div>
 
 
