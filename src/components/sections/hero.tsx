@@ -3,18 +3,23 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <div className="py-32 md:py-8 relative z-0 overflow-x-clip">
-      {/* background */}
-      <div
-        className="absolute inset-0 -z-30 opacity-5"
-        style={{ backgroundImage: `url(${"/grain.jpg"})` }}
-      ></div>
-      <div className="hero-ring size-[620px]"></div>
-      <div className="hero-ring size-[820px]"></div>
-      <div className="hero-ring size-[1020px]"></div>
-      <div className="hero-ring size-[1220px]"></div>
-      {/* background */}
-
+    <div className="py-32 md:py-8 relative z-0 overflow-clip max-h-screen">
+      <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)] pointer-events-none">
+        {/* background */}
+        <div
+          className="absolute inset-0 -z-30 opacity-5"
+          style={{ backgroundImage: `url(${"/grain.jpg"})` }}
+        ></div>
+        <div className="hero-ring size-[620px]"></div>
+        <div className="hero-ring size-[820px]"></div>
+        <div className="hero-ring size-[1020px]"></div>
+        <div className="hero-ring size-[1220px]"></div>
+        <div className="hero-ring size-[1420px]"></div>
+        <div className="hero-ring size-[1620px]"></div>
+        <div className="hero-ring size-[1820px]"></div>
+        <div className="hero-ring size-[2020px]"></div>
+        {/* background */}
+      </div>
       <div className="container">
         <div className="flex flex-col items-center">
           <Image
@@ -42,7 +47,7 @@ const HeroSection = () => {
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          <button className="inline-flex items-center gap-2 border border-white/20 px-8 h-12 rounded-xl">
+          <button className="inline-flex items-center gap-2 border-2 border-white/20 px-[30px] h-12 rounded-xl">
             <ArrowDown className="size-4" />
             <span className="font-semibold">Explore My Work</span>
           </button>
