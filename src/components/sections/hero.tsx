@@ -28,6 +28,7 @@ const HeroSection = () => {
             width={400}
             height={400}
             className="filter grayscale"
+            priority
           />
           <div className="bg-gray-950 border border-gray-800 px-4 py-1.5 inline-flex w-[400px] items-center gap-4 rounded-lg justify-center">
             <div className="bg-green-500 size-2.5 rounded-full"></div>
@@ -38,8 +39,11 @@ const HeroSection = () => {
         </div>
         <div className="max-w-lg mx-auto">
           <h1 className="font-serif text-3xl text-center mt-8 tracking-wide md:text-5xl">
-            Building sleek Web Applications
+            Nazmul Hussain
           </h1>
+          <h3 className="font-serif text-xl text-center mt-4 tracking-wide md:text-2xl">
+            Web Developer
+          </h3>
           <p className="mt-4 text-center text-white/60 md:text-lg">
             I specialize in making functional, high-performing web applications
             with Next.js, TypeScript, Prisma. Let&apos;s discuss your next

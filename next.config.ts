@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ghks3sgigz.ufs.sh",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+    minimumCacheTTL: 60,
+  },
 };
 
 export default nextConfig;
