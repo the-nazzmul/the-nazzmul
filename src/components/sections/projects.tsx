@@ -6,6 +6,8 @@ import {
   PackageOpenIcon,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 
 const ProjectsSection = () => {
   return (
@@ -59,33 +61,34 @@ const ProjectsSection = () => {
                 </ul>
                 <div className="flex flex-wrap gap-y-2 gap-x-1.5 my-4">
                   {project.technologies.map((technology) => (
-                    <div
+                    <Badge
+                      variant="outline"
+                      className="text-white/70"
                       key={technology.title}
-                      className="bg-transparent text-white/70 text-xs outline outline-[1px] rounded-full px-1.5"
                     >
                       {technology.title}
-                    </div>
+                    </Badge>
                   ))}
                 </div>
                 <div className="flex items-center justify-between gap-2 md:justify-start md:gap-6">
-                  <button className="inline-flex gap-1 text-base items-center px-2 py-0.5 bg-white rounded-xl text-gray-950 font-semibold md:h-12 md:px-4 md:py-2">
+                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
                     <a href={project.livesite} target="_blank">
                       Live
                     </a>
                     <ArrowUpRightIcon className="size-4" />
-                  </button>
-                  <button className="inline-flex gap-1 text-base items-center px-2 py-0.5 bg-white rounded-xl text-gray-950 font-semibold md:h-12 md:px-4 md:py-2">
+                  </Button>
+                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
                     <a href={project.github} target="_blank">
                       Codes
                     </a>
                     <Code2Icon className="size-4" />
-                  </button>
-                  <button className="inline-flex gap-1 text-base items-center px-2 py-0.5 bg-white rounded-xl text-gray-950 font-semibold md:h-12 md:px-4 md:py-2">
+                  </Button>
+                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
                     <a href="#" target="_blank">
                       Details
                     </a>
                     <PackageOpenIcon className="size-4" />
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
