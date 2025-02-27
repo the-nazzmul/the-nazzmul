@@ -1,27 +1,27 @@
 import { PROJECTS_DATA } from "@/lib/constants";
 import {
-  ArrowUpRightIcon,
+  ArrowUpRightSquareIcon,
   CheckCircle2Icon,
-  Code2Icon,
+  CodeSquareIcon,
   PackageOpenIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 
 const ProjectsSection = () => {
   return (
-    <section className="md:py-16 pb-16">
+    <section className="md:py-16 pb-16 lg:py-24">
       <div className="container">
         <h2 className="font-serif text-3xl uppercase font-semibold tracking-widest bg-gradient-to-r from-teal-500  to-indigo-600  text-center text-transparent bg-clip-text md:text-5xl mt-6">
           Hobby Projects
         </h2>
         <div className="flex justify-center "></div>
-        <p className="text-center text-white/60 mt-4 md:text-lg max-w-md mx-auto">
+        <p className="text-center text-white/60 mt-4 md:text-lg max-w-md mx-auto lg:text-xl">
           All the projects here were built to solve particular problems I faced
           in different situations.
         </p>
-        <div className="flex flex-col mt-10 gap-20">
+        <div className="flex flex-col mt-10 gap-20 md:mt-20">
           {PROJECTS_DATA.map((project, index) => (
             <div
               key={index}
@@ -38,28 +38,30 @@ const ProjectsSection = () => {
                 height={900}
                 className="mb-4 rounded-b-xl"
               />
-              <div className="p-8 pt-0">
+              <div className="p-8 pt-0 md:p-10">
                 <div className="flex">
-                  <h1 className="bg-gradient-to-r from-cyan-500 to-indigo-600 inline-flex font-bold uppercase tracking-widest text-2xl mt-2 gap-2 text-transparent bg-clip-text font-serif">
+                  <h1 className="bg-gradient-to-r from-cyan-500 to-indigo-600 inline-flex font-bold uppercase tracking-widest text-2xl mt-2 gap-2 text-transparent bg-clip-text font-serif md:text-4xl">
                     <span>{project.title}</span>
                     <span>&bull;</span>
                     <span>{project.year}</span>
                   </h1>
                 </div>
                 <hr className="border-t-2 border-white/5 my-4" />
-                <p className="text-justify text-white/60">{project.overview}</p>
-                <ul className="flex flex-col gap-1 mt-4">
+                <p className="text-justify text-white/60 md:text-base">
+                  {project.overview}
+                </p>
+                <ul className="flex flex-col gap-1 my-4 md:my-5">
                   {project.mainFeatures.slice(0, 3).map((feature) => (
                     <li
                       key={feature.title}
-                      className="flex gap-2 items-center text-sm text-white/80"
+                      className="flex gap-2 items-center text-sm text-white/80 md:text-base"
                     >
-                      <CheckCircle2Icon className="size-5" />
+                      <CheckCircle2Icon className="size-5 md:size-6" />
                       <span>{feature.title}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-y-2 gap-x-1.5 my-4">
+                <div className="flex flex-wrap gap-y-2 gap-x-1.5 my-4 md:my-5">
                   {project.technologies.map((technology) => (
                     <Badge
                       variant="outline"
@@ -70,21 +72,29 @@ const ProjectsSection = () => {
                     </Badge>
                   ))}
                 </div>
-                <div className="flex items-center justify-between gap-2 md:justify-start md:gap-6">
-                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
-                    <a href={project.livesite} target="_blank">
+                <div className="flex items-center justify-between gap-2 md:justify-start md:gap-6 mt-4">
+                  <Button className="inline-flex gap-1 text-base items-center p-2  rounded-lg  font-semibold  md:px-8 md:py-4 md:h-12">
+                    <a
+                      href={project.livesite}
+                      target="_blank"
+                      className="md:text-xl"
+                    >
                       Live
                     </a>
-                    <ArrowUpRightIcon className="size-4" />
+                    <ArrowUpRightSquareIcon className="size-4" />
                   </Button>
-                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
-                    <a href={project.github} target="_blank">
+                  <Button className="inline-flex gap-1 text-base items-center p-2  rounded-lg font-semibold  md:px-8 md:py-4 md:h-12">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      className="md:text-xl"
+                    >
                       Codes
                     </a>
-                    <Code2Icon className="size-4" />
+                    <CodeSquareIcon className="size-4" />
                   </Button>
-                  <Button className="inline-flex gap-1 text-base items-center p-2 bg-white rounded-lg text-gray-950 font-semibold  md:px-4 md:py-2">
-                    <a href="#" target="_blank">
+                  <Button className="inline-flex gap-1 text-base items-center p-2  rounded-lg font-semibold  md:px-8 md:py-4 md:h-12">
+                    <a href="#" target="_blank" className="md:text-xl">
                       Details
                     </a>
                     <PackageOpenIcon className="size-4" />

@@ -1,9 +1,10 @@
 import { ArrowDown, DownloadIcon } from "lucide-react";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="py-32 md:py-8 relative z-0 overflow-clip max-h-screen">
+    <div className="py-32 md:py-4 relative z-0 overflow-clip min-h-screen">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)] pointer-events-none">
         {/* background */}
         <div
@@ -31,7 +32,7 @@ const HeroSection = () => {
             priority
           />
           <div className="bg-gray-950 border border-gray-800 px-4 py-1.5 inline-flex w-[400px] items-center gap-4 rounded-lg justify-center">
-            <div className="bg-green-500 size-2.5 rounded-full"></div>
+            <div className="bg-gradient-to-r from-teal-500 to-indigo-600 size-2.5 rounded-full"></div>
             <div className="text-sm font-medium">
               Available for new projects
             </div>
@@ -51,14 +52,14 @@ const HeroSection = () => {
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          <button className="inline-flex items-center gap-2 border-2 border-white/20 px-[30px] h-12 rounded-xl">
+          <button className="inline-flex items-center gap-2 border-2 border-white/20 px-6 h-12 rounded-xl">
             <ArrowDown className="size-4" />
             <span className="font-semibold">Explore My Work</span>
           </button>
-          <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl">
+          <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
             <DownloadIcon className="size-4" />
             <span className="font-semibold">Download Resume</span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
