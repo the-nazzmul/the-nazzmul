@@ -150,3 +150,34 @@ export const PROJECTS_DATA = [
     livesite: "https://mireon-nazz.vercel.app",
   },
 ];
+
+export const TESTIMONIALS = [
+  {
+    name: "Micherl Brows",
+    position: "Director of IT @ MegaCord",
+    testimonial:
+      "I've been working with Nazmul for over a year now and I'm impressed with his work. He's a great developer and a great person. I highly recommend him.",
+    avatar: "/assets/memoji-avatar-1.png",
+  },
+  {
+    name: "Micherl Brows",
+    position: "Director of IT @ MegaCord",
+    testimonial:
+      "I've been working with Nazmul for over a year now and I'm impressed with his work. He's a great developer and a great person. I highly recommend him.",
+    avatar: "/assets/memoji-avatar-1.png",
+  },
+  {
+    name: "Micherl Brows",
+    position: "Director of IT @ MegaCord",
+    testimonial:
+      "I've been working with Nazmul for over a year now and I'm impressed with his work. He's a great developer and a great person. I highly recommend him.",
+    avatar: "/assets/memoji-avatar-1.png",
+  },
+  {
+    name: "Micherl Brows",
+    position: "Director of IT @ MegaCord",
+    testimonial:
+      "I've been working with Nazmul for over a year now and I'm impressed with his work. He's a great developer and a great person. I highly recommend him.",
+    avatar: "/assets/memoji-avatar-1.png",
+  },
+];

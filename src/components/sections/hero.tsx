@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="py-32 md:py-4 relative z-0 overflow-clip min-h-screen">
+    <section className="py-32 md:py-4 relative z-0 overflow-clip min-h-screen">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)] pointer-events-none">
         {/* background */}
         <div
@@ -62,7 +62,7 @@ const HeroSection = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

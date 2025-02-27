@@ -6,6 +6,7 @@ import {
   PackageOpenIcon,
 } from "lucide-react";
 import Image from "next/image";
+import SectionHeader from "../section-header";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
@@ -13,14 +14,11 @@ const ProjectsSection = () => {
   return (
     <section className="md:py-16 pb-16 lg:py-24">
       <div className="container">
-        <h2 className="font-serif text-3xl uppercase font-semibold tracking-widest bg-gradient-to-r from-teal-500  to-indigo-600  text-center text-transparent bg-clip-text md:text-5xl mt-6">
-          Hobby Projects
-        </h2>
-        <div className="flex justify-center "></div>
-        <p className="text-center text-white/60 mt-4 md:text-lg max-w-md mx-auto lg:text-xl">
-          All the projects here were built to solve particular problems I faced
-          in different situations.
-        </p>
+        <SectionHeader
+          title="Hobby Projects"
+          description="All the projects here were built to solve particular problems I faced
+          in different situations."
+        />
         <div className="flex flex-col mt-10 gap-20 md:mt-20">
           {PROJECTS_DATA.map((project, index) => (
             <div
