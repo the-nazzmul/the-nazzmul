@@ -12,8 +12,8 @@ import {
 
 const HeaderSection = () => {
   return (
-    <nav className="flex fixed z-50 w-full p-1.5 border border-white/15 rounded-lg bg-white/10 backdrop-blur">
-      <div className="lg:container mx-auto w-full flex items-center justify-between px-1.5 lg:px-0">
+    <nav className="flex fixed z-50 w-full md:top-3 top-1.5">
+      <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3">
         <div>
           <Image
             src="/the-nazzmul.png"
@@ -22,7 +22,7 @@ const HeaderSection = () => {
             height={40}
           />
         </div>
-        <div className="lg:flex gap-1 hidden">
+        <div className="md:flex gap-1 hidden">
           <Link href="#" className="nav-item">
             Home
           </Link>
@@ -32,17 +32,14 @@ const HeaderSection = () => {
           <Link href="#" className="nav-item">
             Projects
           </Link>
-          <Link
-            href="#"
-            className="nav-item bg-white text-gray-900 hover:bg-white/70 hover:text-gray-900"
-          >
+          <Link href="#" className="nav-item ">
             Contact
           </Link>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           <Button>Resume</Button>
         </div>
-        <div className="lg:hidden ">
+        <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button
