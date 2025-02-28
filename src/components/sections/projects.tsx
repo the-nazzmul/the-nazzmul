@@ -35,7 +35,7 @@ const ProjectsSection = () => {
                 </div>
                 <div className="p-8 pt-0 md:p-10 ">
                   <div className="flex">
-                    <h1 className="bg-gradient-to-r from-cyan-500 to-indigo-600 inline-flex font-bold uppercase tracking-widest text-2xl mt-2 gap-2 text-transparent bg-clip-text font-serif md:text-4xl">
+                    <h1 className="text-white inline-flex font-bold uppercase tracking-widest text-2xl mt-2 gap-2  font-serif md:text-4xl">
                       <span>{project.title}</span>
                       <span>&bull;</span>
                       <span>{project.year}</span>

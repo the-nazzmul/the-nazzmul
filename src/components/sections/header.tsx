@@ -13,7 +13,7 @@ import {
 const HeaderSection = () => {
   return (
     <nav className="flex fixed z-50 w-full md:top-3 top-1.5">
-      <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3">
+      <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3 lg:px-2.5">
         <div>
           <Image
             src="/the-nazzmul.png"
