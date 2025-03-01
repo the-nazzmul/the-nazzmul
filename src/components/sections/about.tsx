@@ -11,7 +11,7 @@ const AboutSection = () => {
         title="About Me"
         description="Learn about who I am, What I do, and what inspires me"
       />
-      <div>
+      <div className="py-16 lg:py-24">
         <Card className="p-6">
           <div>
             <BookOpenTextIcon />
