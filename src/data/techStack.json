@@ -1,0 +1,16 @@
+[
+  { "name": "JavaScript", "iconUrl": "/icons/javascript.svg" },
+  { "name": "TypeScript", "iconUrl": "/icons/typescript.svg" },
+  { "name": "React", "iconUrl": "/icons/react.svg" },
+  { "name": "Express", "iconUrl": "/icons/express.svg" },
+  { "name": "MongoDB", "iconUrl": "/icons/mongodb.svg" },
+  { "name": "Mongoose", "iconUrl": "/icons/mongoose.svg" },
+  { "name": "Node.js", "iconUrl": "/icons/nodejs.svg" },
+  { "name": "Next.js", "iconUrl": "/icons/nextjs.svg" },
+  { "name": "PostgreSQL", "iconUrl": "/icons/postgresql.svg" },
+  { "name": "Python", "iconUrl": "/icons/python.svg" },
+  { "name": "tRPC", "iconUrl": "/icons/trpc.svg" },
+  { "name": "Tailwind CSS", "iconUrl": "/icons/tailwindcss.svg" },
+  { "name": "Vite", "iconUrl": "/icons/vitejs.svg" },
+  { "name": "Prisma", "iconUrl": "/icons/prisma.svg" }
+]
