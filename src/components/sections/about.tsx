@@ -1,9 +1,15 @@
-import SectionHeader from "../section-header";
-import Card from "../card";
-import { BookOpenTextIcon, WrenchIcon } from "lucide-react";
+import {
+  BookOpenTextIcon,
+  MapPinIcon,
+  SparklesIcon,
+  WrenchIcon,
+} from "lucide-react";
 import Image from "next/image";
 import techStack from "../../data/techStack.json";
+import Card from "../card";
+import SectionHeader from "../section-header";
 import TechIcon from "../tech-icon";
+import { HOBBIES } from "@/lib/constants";
 
 const AboutSection = () => {
   return (
@@ -37,12 +43,31 @@ const AboutSection = () => {
               {techStack.map((tech) => (
                 <div key={tech.name}>
                   <span>{tech.name}</span>
-                  <div className="bg-white rounded-xl p-1 max-w-fit">
+                  <div className="bg-gradient-to-r from-gray-200  to-gray-400 rounded-xl p-1 max-w-fit">
                     <TechIcon iconUrl={tech.iconUrl} />
                   </div>
                 </div>
               ))}
             </div>
+          </Card>
+          <Card className="p-6">
+            <div>
+              <SparklesIcon fill="currentColor" />
+              <h3>Beyond the Codes</h3>
+              <p>Explore my interests and hobbies beyond the digital realm.</p>
+            </div>
+            <div>
+              {HOBBIES.map((hobby) => (
+                <div key={hobby.title}>
+                  <span>{hobby.title}</span>
+                  <span>{hobby.emoji}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+          <Card>
+            <Image src="/assets/map.png" alt="map" width={1000} height={1000} />
+            <MapPinIcon />
           </Card>
         </div>
       </div>

@@ -181,3 +181,11 @@ export const TESTIMONIALS = [
     avatar: "/assets/memoji-avatar-1.png",
   },
 ];
+
+export const HOBBIES = [
+  { title: "Motorcycles", emoji: "🏍️" },
+  { title: "Photography", emoji: "📷" },
+  { title: "Painting", emoji: "🎨" },
+  { title: "Reading", emoji: "📚" },
+  { title: "Traveling", emoji: "🌍" },
+];
