@@ -7,7 +7,7 @@ const TechIcon = ({ iconUrl }: { iconUrl: string }) => {
       alt="icon"
       width={40}
       height={40}
-      className="rounded-xl"
+      className="rounded-[8px]"
     />
   );
 };

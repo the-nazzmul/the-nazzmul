@@ -188,4 +188,6 @@ export const HOBBIES = [
   { title: "Painting", emoji: "🎨" },
   { title: "Reading", emoji: "📚" },
   { title: "Traveling", emoji: "🌍" },
+  { title: "Fountain Pens", emoji: "🖋️" },
+  { title: "Content Creation", emoji: "📹" },
 ];

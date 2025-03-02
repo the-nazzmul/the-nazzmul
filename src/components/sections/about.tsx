@@ -1,9 +1,4 @@
-import {
-  BookOpenTextIcon,
-  MapPinIcon,
-  SparklesIcon,
-  WrenchIcon,
-} from "lucide-react";
+import { BookOpenTextIcon, SparklesIcon, WrenchIcon } from "lucide-react";
 import Image from "next/image";
 import { HOBBIES } from "@/lib/constants";
 import Card from "../card";
@@ -19,7 +14,7 @@ const AboutSection = () => {
           title="About Me"
           description="Learn about who I am, What I do, and what inspires me"
         />
-        <div className="mt-20">
+        <div className="mt-16 flex flex-col gap-8">
           <Card className="p-6 h-[320px]">
             <div className="flex flex-col">
               <div className="inline-flex gap-2 items-center">
@@ -49,10 +44,14 @@ const AboutSection = () => {
                 Explore the technologies and tools I use.
               </p>
             </div>
-            <ToolboxItems techStack={techStack} className="mt-6" />
-            <ToolboxItems techStack={techStack} className="mt-6" />
+            <ToolboxItems techStack={techStack} />
+            <ToolboxItems
+              techStack={techStack}
+              className="mt-6"
+              itemsWrapperClassName="-translate-x-1/2"
+            />
           </Card>
-          <Card className="p-6">
+          <Card className="p-6 h-[320px]">
             <div className="flex flex-col">
               <div className="inline-flex gap-2 items-center">
                 <SparklesIcon className="size-8 text-gray-200" />
@@ -62,18 +61,28 @@ const AboutSection = () => {
                 Explore my interests and hobbies beyond the digital realm.
               </p>
             </div>
-            <div>
+            <div className="mt-4 flex flex-wrap gap-2">
               {HOBBIES.map((hobby) => (
-                <div key={hobby.title}>
-                  <span>{hobby.title}</span>
+                <div
+                  key={hobby.title}
+                  className="inline-flex items-center gap-2 px-2.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1"
+                >
+                  <span className="font-medium text-gray-950">
+                    {hobby.title}
+                  </span>
                   <span>{hobby.emoji}</span>
                 </div>
               ))}
             </div>
           </Card>
-          <Card>
-            <Image src="/assets/map.png" alt="map" width={1000} height={1000} />
-            <MapPinIcon />
+          <Card className=" h-[320px]">
+            <Image
+              src="/assets/map.png"
+              alt="map"
+              width={1000}
+              height={1000}
+              className="h-full w-full object-cover"
+            />
           </Card>
         </div>
       </div>
