@@ -5,8 +5,8 @@ const TechIcon = ({ iconUrl }: { iconUrl: string }) => {
     <Image
       src={iconUrl}
       alt="icon"
-      width={50}
-      height={50}
+      width={40}
+      height={40}
       className="rounded-xl"
     />
   );

@@ -5,56 +5,62 @@ import {
   WrenchIcon,
 } from "lucide-react";
 import Image from "next/image";
-import techStack from "../../data/techStack.json";
+import { HOBBIES } from "@/lib/constants";
 import Card from "../card";
 import SectionHeader from "../section-header";
-import TechIcon from "../tech-icon";
-import { HOBBIES } from "@/lib/constants";
+import { ToolboxItems } from "../toolbox-items";
+import techStack from "../../data/techStack.json";
 
 const AboutSection = () => {
   return (
     <div className="py-16 lg:py-24">
-      <div className="pb-96">
+      <div className="container">
         <SectionHeader
           title="About Me"
           description="Learn about who I am, What I do, and what inspires me"
         />
-        <div>
-          <Card className="p-6">
-            <div>
-              <BookOpenTextIcon />
-              <h3>Reads</h3>
-              <p>Explore the books shaping my perspectives.</p>
+        <div className="mt-20">
+          <Card className="p-6 h-[320px]">
+            <div className="flex flex-col">
+              <div className="inline-flex gap-2 items-center">
+                <BookOpenTextIcon className="size-8 text-gray-200" />
+                <h3 className="font-serif text-3xl">Reads</h3>
+              </div>
+              <p className="text-sm text-white/60 mt-2">
+                Explore the books shaping my perspectives.
+              </p>
+            </div>
+            <div className="w-40 mx-auto mt-8">
               <Image
                 src="/assets/book-cover.png"
                 alt="Book Cover"
-                width={400}
-                height={400}
+                width={300}
+                height={300}
               />
             </div>
           </Card>
-          <Card className="p-6">
-            <div>
-              <WrenchIcon />
-              <h3>Toolbox</h3>
-              <p>Explore the technologies and tools I use.</p>
+          <Card className="h-[320px]">
+            <div className="flex flex-col p-6">
+              <div className="inline-flex gap-2 items-center">
+                <WrenchIcon className="size-8 text-gray-200" />
+                <h3 className="font-serif text-3xl">Toolbox</h3>
+              </div>
+              <p className="text-sm text-white/60 mt-2">
+                Explore the technologies and tools I use.
+              </p>
             </div>
-            <div>
-              {techStack.map((tech) => (
-                <div key={tech.name}>
-                  <span>{tech.name}</span>
-                  <div className="bg-gradient-to-r from-gray-200  to-gray-400 rounded-xl p-1 max-w-fit">
-                    <TechIcon iconUrl={tech.iconUrl} />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ToolboxItems techStack={techStack} className="mt-6" />
+            <ToolboxItems techStack={techStack} className="mt-6" />
           </Card>
           <Card className="p-6">
-            <div>
-              <SparklesIcon fill="currentColor" />
-              <h3>Beyond the Codes</h3>
-              <p>Explore my interests and hobbies beyond the digital realm.</p>
+            <div className="flex flex-col">
+              <div className="inline-flex gap-2 items-center">
+                <SparklesIcon className="size-8 text-gray-200" />
+                <h3 className="font-serif text-3xl">Beyond the Codes</h3>
+              </div>
+              <p className="text-sm text-white/60 mt-2">
+                Explore my interests and hobbies beyond the digital realm.
+              </p>
             </div>
             <div>
               {HOBBIES.map((hobby) => (
