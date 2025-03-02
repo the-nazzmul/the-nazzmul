@@ -5,7 +5,7 @@ import Card from "../card";
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="pt-16 lg:py-20">
       <div className="container">
         <SectionHeader
           title="Testimonials"

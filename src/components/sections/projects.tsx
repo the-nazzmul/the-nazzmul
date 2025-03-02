@@ -13,7 +13,7 @@ import Card from "../card";
 
 const ProjectsSection = () => {
   return (
-    <section className="md:py-16 pb-16 lg:py-24">
+    <section className="py-16  lg:py-20">
       <div className="container">
         <SectionHeader
           title="Hobby Projects"
