@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import TechIcon from "./tech-icon";
+import { Fragment } from "react";
 
 export const ToolboxItems = ({
   techStack,
@@ -23,16 +24,20 @@ export const ToolboxItems = ({
           itemsWrapperClassName
         )}
       >
-        {techStack.map((tech) => (
-          <div
-            key={tech.name}
-            className="inline-flex items-center gap-4 py-2 px-3 outline outline-2 outline-white/10 rounded-lg"
-          >
-            <div className="bg-white rounded-[12px] p-1 max-w-fit">
-              <TechIcon iconUrl={tech.iconUrl} />
-            </div>
-            <span className="font-semibold">{tech.name}</span>
-          </div>
+        {[...Array(2)].fill(0).map((_, index) => (
+          <Fragment key={index}>
+            {techStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="inline-flex items-center gap-4 pr-4 py-2 px-3 outline outline-2 outline-white/10 rounded-lg"
+              >
+                <div className="bg-white rounded-[12px] p-1 max-w-fit">
+                  <TechIcon iconUrl={tech.iconUrl} />
+                </div>
+                <span className="font-semibold">{tech.name}</span>
+              </div>
+            ))}
+          </Fragment>
         ))}
       </div>
     </div>

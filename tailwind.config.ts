@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 export default {
@@ -23,6 +24,7 @@ export default {
     extend: {
       animation: {
         "move-left": "move-left 30s linear infinite",
+        "move-right": "move-right 30s linear infinite",
       },
       keyframes: {
         "move-left": {
@@ -31,6 +33,14 @@ export default {
           },
           "100%": {
             transform: "translateX(-50%)",
+          },
+        },
+        "move-right": {
+          "0%": {
+            transform: "translateX(-50%)",
+          },
+          "100%": {
+            transform: "translateX(0%)",
           },
         },
       },

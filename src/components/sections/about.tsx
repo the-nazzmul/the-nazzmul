@@ -45,11 +45,14 @@ const AboutSection = () => {
                   Explore the technologies and tools I use.
                 </p>
               </div>
-              <ToolboxItems techStack={techStack} />
+              <ToolboxItems
+                techStack={techStack}
+                itemsWrapperClassName="animate-move-left [animation-duration:30s]"
+              />
               <ToolboxItems
                 techStack={techStack}
                 className="mt-6"
-                itemsWrapperClassName="-translate-x-1/2"
+                itemsWrapperClassName="animate-move-right [animate-duration-20s]"
               />
             </Card>
           </div>

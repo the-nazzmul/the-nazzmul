@@ -8,6 +8,7 @@ const TechIcon = ({ iconUrl }: { iconUrl: string }) => {
       width={40}
       height={40}
       className="rounded-[8px]"
+      priority
     />
   );
 };
