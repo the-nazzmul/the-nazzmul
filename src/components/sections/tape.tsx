@@ -1,4 +1,5 @@
 import { ZapIcon } from "lucide-react";
+import { Fragment } from "react";
 
 const WORDS = [
   "Performance",
@@ -23,14 +24,18 @@ const TapeSection = () => {
     <section className="py-16 lg:py-24 overflow-x-clip">
       <div className="bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 overflow-x-clip -rotate-3 -mx-1">
         <div className="flex [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex flex-none gap-4 py-3">
-            {WORDS.map((word) => (
-              <div key={word} className="inline-flex gap-4 items-center">
-                <span className="text-gray-900 uppercase font-extrabold text-sm">
-                  {word}
-                </span>
-                <ZapIcon className="size-5 text-gray-900 fill-gray-900" />
-              </div>
+          <div className="flex flex-none gap-4 pr-4 py-3 animate-move-left">
+            {[...new Array(2)].fill(0).map((_, index) => (
+              <Fragment key={index}>
+                {WORDS.map((word) => (
+                  <div key={word} className="inline-flex gap-4 items-center">
+                    <span className="text-gray-900 uppercase font-extrabold text-sm">
+                      {word}
+                    </span>
+                    <ZapIcon className="size-5 text-gray-900 fill-gray-900" />
+                  </div>
+                ))}
+              </Fragment>
             ))}
           </div>
         </div>
