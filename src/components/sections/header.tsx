@@ -58,7 +58,7 @@ const HeaderSection = () => {
                     width={40}
                     height={40}
                   />
-                  <div className="font-serif text-xl uppercase font-semibold tracking-widest bg-gradient-to-r from-teal-500  to-indigo-600  text-center text-transparent bg-clip-text">
+                  <div className="font-serif text-xl uppercase font-semibold tracking-widest bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-center text-transparent bg-clip-text">
                     <span>Nazmul Hussain</span>
                   </div>
                 </SheetTitle>
