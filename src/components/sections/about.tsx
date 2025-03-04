@@ -14,7 +14,7 @@ const AboutSection = () => {
           title="About Me"
           description="Learn about who I am, What I do, and what inspires me"
         />
-        <div className="mt-16 flex flex-col gap-8">
+        <div className="mt-16 flex flex-col gap-8 py-4">
           <div className="md:grid grid-cols-5 lg:grid-cols-3 md:gap-8 flex flex-col md:flex-none gap-8">
             <Card className="p-6 h-[320px] md:col-span-2 lg:col-span-1">
               <div className="flex flex-col">
