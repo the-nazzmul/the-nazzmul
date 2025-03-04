@@ -22,9 +22,15 @@ const ProjectsSection = () => {
         />
         <div className="flex flex-col mt-16 gap-20 md:mt-20">
           {PROJECTS_DATA.map((project, index) => (
-            <Card key={index}>
+            <Card
+              key={index}
+              className="sticky"
+              style={{
+                top: `calc(72px + ${index * 40}px)`,
+              }}
+            >
               <div className="lg:grid lg:grid-cols-2">
-                <div className="lg:flex items-end relative">
+                <div className="lg:flex items-end">
                   <Image
                     src={project.image}
                     alt={project.title}
