@@ -68,7 +68,7 @@ const AboutSection = () => {
                 {HOBBIES.map((hobby) => (
                   <div
                     key={hobby.title}
-                    className="inline-flex items-center gap-2 px-2.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1"
+                    className="inline-flex items-center gap-2 px-2.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full py-1 lg:text-xl lg:px-8 lg:py-4"
                   >
                     <span className="font-medium text-gray-950">
                       {hobby.title}

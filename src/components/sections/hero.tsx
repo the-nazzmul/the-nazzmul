@@ -1,10 +1,12 @@
 import { ArrowDown, DownloadIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <section className="py-32 md:py-4 relative z-0 overflow-clip min-h-screen">
+    <section className="py-32 md:py-8 relative z-0 overflow-clip min-h-screen">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)] pointer-events-none">
         {/* background */}
         <div
@@ -26,16 +28,27 @@ const HeroSection = () => {
           <Image
             src="/hero-image.png"
             alt="nazmul hussain"
-            width={400}
-            height={400}
+            width={350}
+            height={350}
             className="filter grayscale"
             priority
           />
-          <div className="bg-gray-950 border border-gray-800 px-4 py-1.5 inline-flex w-[400px] items-center gap-4 rounded-lg justify-center">
-            <div className="bg-gradient-to-r from-teal-500 to-indigo-600 size-2.5 rounded-full"></div>
-            <div className="text-sm font-medium">
-              Available for new projects
-            </div>
+          <div className="bg-gray-700 px-4 py-1.5 inline-flex w-[350px] items-center gap-4 rounded-lg justify-center">
+            <Link href="#" className="animate-pulse">
+              <Button className="rounded-full p-2 h-fit">
+                <FaGithub className="size-4" />
+              </Button>
+            </Link>
+            <Link href="#" className="animate-pulse">
+              <Button className="rounded-full p-2 h-fit">
+                <FaLinkedin className="size-4" />
+              </Button>
+            </Link>
+            <Link href="#" className="animate-pulse">
+              <Button className="rounded-full p-2 h-fit">
+                <FaXTwitter className="size-4" />
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="max-w-lg mx-auto">
