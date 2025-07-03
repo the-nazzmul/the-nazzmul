@@ -3,16 +3,12 @@ import Link from "next/link";
 
 const FOOTER_LINKS = [
   {
-    title: "YouTube",
-    href: "",
-  },
-  {
     title: "Linkedin",
-    href: "",
+    href: "https://www.linkedin.com/in/nazmul-hussain-utchchash/",
   },
   {
     title: "Github",
-    href: "",
+    href: "https://github.com/the-nazzmul",
   },
 ];
 

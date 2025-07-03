@@ -1,5 +1,6 @@
 import { ArrowUpRightIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const ContactSection = () => {
   return (
@@ -20,10 +21,15 @@ const ContactSection = () => {
                 discuss about how I can help you achieve your goals.
               </p>
             </div>
-            <Button className="text-white bg-gray-900 inline-flex items-center px-6 h-12 rounded-xl gap-2 mt-2 hover:text-gray-900 hover:bg-white hover:border hover:border-gray-900 w-max border border-gray-900">
-              <span className="font-semibold">Contact Me</span>
-              <ArrowUpRightIcon className="size-4" />
-            </Button>
+            <Link
+              href="https://www.linkedin.com/in/nazmul-hussain-utchchash/"
+              target="_blank"
+            >
+              <Button className="text-white bg-gray-900 inline-flex items-center px-6 h-12 rounded-xl gap-2 mt-2 hover:text-gray-900 hover:bg-white hover:border hover:border-gray-900 w-max border border-gray-900">
+                <span className="font-semibold">Contact Me</span>
+                <ArrowUpRightIcon className="size-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

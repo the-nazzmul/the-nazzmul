@@ -1,7 +1,7 @@
 import { ArrowDown, DownloadIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { Button } from "../ui/button";
 
 const HeroSection = () => {
@@ -34,19 +34,20 @@ const HeroSection = () => {
             priority
           />
           <div className="bg-gray-700 px-4 py-1.5 inline-flex w-[350px] items-center gap-4 rounded-lg justify-center">
-            <Link href="#" className="animate-pulse">
+            <Link
+              href="https://github.com/the-nazzmul"
+              className="animate-pulse"
+            >
               <Button className="rounded-full p-2 h-fit">
                 <FaGithub className="size-4" />
               </Button>
             </Link>
-            <Link href="#" className="animate-pulse">
+            <Link
+              href="https://www.linkedin.com/in/nazmul-hussain-utchchash/"
+              className="animate-pulse"
+            >
               <Button className="rounded-full p-2 h-fit">
                 <FaLinkedin className="size-4" />
-              </Button>
-            </Link>
-            <Link href="#" className="animate-pulse">
-              <Button className="rounded-full p-2 h-fit">
-                <FaXTwitter className="size-4" />
               </Button>
             </Link>
           </div>
