@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ghks3sgigz.ufs.sh",
-        port: "",
-        pathname: "/**",
+        hostname: "**",
       },
     ],
     minimumCacheTTL: 60,

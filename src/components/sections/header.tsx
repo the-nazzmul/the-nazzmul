@@ -37,7 +37,12 @@ const HeaderSection = () => {
           </Link>
         </div>
         <div className="hidden md:block">
-          <Button>Resume</Button>
+          <Link
+            href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing"
+            target="_blank"
+          >
+            <Button>Resume</Button>
+          </Link>
         </div>
         <div className="md:hidden">
           <Sheet>
@@ -78,6 +83,7 @@ const HeaderSection = () => {
               <Link
                 href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing"
                 className="nav-item-mobile"
+                target="_blank"
               >
                 <Button size="sm">Resume</Button>
               </Link>

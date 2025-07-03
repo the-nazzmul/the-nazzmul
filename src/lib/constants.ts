@@ -41,8 +41,7 @@ export const PROJECTS_DATA = [
       { title: "Langchain JS" },
       { title: "Stripe" },
     ],
-    image:
-      "https://875p1967n4.ufs.sh/f/l33HWhV9rVqMT1uLc97zxFLVGd48vuJS06bMR7aZoPYHBjWc",
+    image: "/projects/mireon-landing-page.png",
     github: "https://github.com/the-nazzmul/mireon",
     livesite: "https://mireon-nazz.vercel.app",
   },
@@ -89,8 +88,7 @@ export const PROJECTS_DATA = [
       { title: "Gemini" },
       { title: "Langchain JS" },
     ],
-    image:
-      "https://875p1967n4.ufs.sh/f/l33HWhV9rVqMUCWa385VqDOyRwr6g1FhnWLEvTlo8msPGzCi",
+    image: "/projects/savant-landing-page.png",
     github: "https://github.com/the-nazzmul/savant",
     livesite: "https://savant-nazz.vercel.app/",
   },
@@ -128,8 +126,7 @@ export const PROJECTS_DATA = [
       { title: "Convex" },
       { title: "Stream SDK" },
     ],
-    image:
-      "https://875p1967n4.ufs.sh/f/l33HWhV9rVqMDwijyLEmpOxItRnsgj9ZMu6KmPJo2BTldW1N",
+    image: "/projects/dev-view-thumbnail.png",
     github: "https://github.com/the-nazzmul/dev-view",
     livesite: "https://dev-view.vercel.app/",
   },
