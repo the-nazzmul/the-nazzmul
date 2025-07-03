@@ -8,7 +8,7 @@ import techStack from "../../data/techStack.json";
 
 const AboutSection = () => {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-16 lg:py-20" id="about">
       <div className="container">
         <SectionHeader
           title="About Me"

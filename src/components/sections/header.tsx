@@ -1,3 +1,5 @@
+"use client";
+
 import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +13,20 @@ import {
 } from "../ui/sheet";
 
 const HeaderSection = () => {
+  const handleScroll = (
+    e: { preventDefault: () => void },
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <nav className="flex fixed z-50 w-full md:top-3 top-1.5">
       <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3 lg:px-2.5">
@@ -23,16 +39,32 @@ const HeaderSection = () => {
           />
         </div>
         <div className="md:flex gap-1 hidden">
-          <Link href="#" className="nav-item">
+          <Link
+            href="#hero"
+            className="nav-item"
+            onClick={(e) => handleScroll(e, "hero")}
+          >
             Home
           </Link>
-          <Link href="#" className="nav-item">
-            About
-          </Link>
-          <Link href="#" className="nav-item">
+          <Link
+            href="#projects"
+            className="nav-item"
+            onClick={(e) => handleScroll(e, "projects")}
+          >
             Projects
           </Link>
-          <Link href="#" className="nav-item ">
+          <Link
+            href="#about"
+            className="nav-item"
+            onClick={(e) => handleScroll(e, "about")}
+          >
+            About
+          </Link>
+          <Link
+            href="#contact"
+            className="nav-item "
+            onClick={(e) => handleScroll(e, "contact")}
+          >
             Contact
           </Link>
         </div>
@@ -68,16 +100,32 @@ const HeaderSection = () => {
                   </div>
                 </SheetTitle>
               </SheetHeader>
-              <Link href="#" className="nav-item-mobile">
+              <Link
+                href="#hero"
+                className="nav-item-mobile"
+                onClick={(e) => handleScroll(e, "hero")}
+              >
                 Home
               </Link>
-              <Link href="#" className="nav-item-mobile">
-                About
-              </Link>
-              <Link href="#" className="nav-item-mobile">
+              <Link
+                href="#projects"
+                className="nav-item-mobile"
+                onClick={(e) => handleScroll(e, "projects")}
+              >
                 Projects
               </Link>
-              <Link href="#" className="nav-item-mobile">
+              <Link
+                href="#about"
+                className="nav-item-mobile"
+                onClick={(e) => handleScroll(e, "about")}
+              >
+                About
+              </Link>
+              <Link
+                href="#contact"
+                className="nav-item-mobile"
+                onClick={(e) => handleScroll(e, "contact")}
+              >
                 Contact
               </Link>
               <Link

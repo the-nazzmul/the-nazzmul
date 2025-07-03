@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ContactSection = () => {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-16 lg:py-20" id="contact">
       <div className="container">
         <div className="bg-gradient-to-r from-emerald-300  to-sky-400 text-gray-900 py-8 px-10 rounded-3xl text-center relative overflow-hidden z-0 md:text-left">
           <div
