@@ -69,10 +69,12 @@ const HeroSection = () => {
             <ArrowDown className="size-4" />
             <span className="font-semibold">Explore My Work</span>
           </button>
-          <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
-            <DownloadIcon className="size-4" />
-            <span className="font-semibold">Download Resume</span>
-          </Button>
+          <Link href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing">
+            <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
+              <DownloadIcon className="size-4" />
+              <span className="font-semibold">Download Resume</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

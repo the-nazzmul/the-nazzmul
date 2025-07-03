@@ -75,7 +75,12 @@ const HeaderSection = () => {
               <Link href="#" className="nav-item-mobile">
                 Contact
               </Link>
-              <Button size="sm">Resume</Button>
+              <Link
+                href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing"
+                className="nav-item-mobile"
+              >
+                <Button size="sm">Resume</Button>
+              </Link>
             </SheetContent>
           </Sheet>
         </div>

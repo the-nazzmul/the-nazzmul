@@ -25,13 +25,9 @@ export const PROJECTS_DATA = [
       { title: "UI improvements" },
     ],
     mainFeatures: [
-      { title: "Code embedding" },
-      { title: "Code summarization" },
-      { title: "Code chatbot" },
-      { title: "Code issues" },
-      { title: "Code suggestions" },
-      { title: "Team collaboration" },
-      { title: "Meeting summarization" },
+      { title: "GitHub repo indexing and code summarization" },
+      { title: "Natural Language Q&A" },
+      { title: "Meeting Recording Analysis" },
     ],
     technologies: [
       { title: "Next.js" },
