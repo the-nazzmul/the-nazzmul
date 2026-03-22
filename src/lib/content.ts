@@ -6,18 +6,60 @@ import type {
 
 const REVALIDATE = 120;
 
-function cmsBase(): string {
+/** Used when CMS_PUBLIC_URL is unset (e.g. Vercel build before env is configured). */
+const FALLBACK_SITE_PAYLOAD: SitePayload = {
+  siteSettings: {
+    siteTitle: "Portfolio",
+    metaDescription: "",
+    logoUrl: null,
+    heroImageUrl: null,
+    grainTextureUrl: null,
+    resumeUrl: "#",
+    githubUrl: "#",
+    linkedinUrl: "#",
+    heroName: "",
+    heroRole: "",
+    heroBio: "",
+    exploreWorkLabel: "Explore work",
+    downloadResumeLabel: "Resume",
+    tapeWords: ["—"],
+    projectsSectionTitle: "Projects",
+    projectsSectionDescription: "",
+    testimonialsSectionTitle: "Testimonials",
+    testimonialsSectionDescription: "",
+    aboutSectionTitle: "About",
+    aboutSectionDescription: "",
+    readsCardTitle: "Reads",
+    readsCardSubtitle: "",
+    bookCoverImageUrl: null,
+    mapImageUrl: null,
+    contactHeadline: "Contact",
+    contactBody: "",
+    contactButtonLabel: "Say hello",
+    contactButtonUrl: "#",
+    footerCopyright: "",
+    blogSectionTitle: "Blog",
+    blogNavLabel: "Blog",
+    authorName: null,
+    authorAvatarUrl: null,
+  },
+  projects: [],
+  testimonials: [],
+  techStack: [],
+  hobbies: [],
+};
+
+function cmsBase(): string | null {
   const raw = process.env.CMS_PUBLIC_URL?.trim();
-  if (!raw) {
-    throw new Error(
-      "CMS_PUBLIC_URL is required. Set it to your CMS public URL (HTTPS in production)."
-    );
-  }
+  if (!raw) return null;
   return raw.replace(/\/$/, "");
 }
 
 async function cmsFetch(path: string, tags: string[]): Promise<Response> {
   const base = cmsBase();
+  if (!base) {
+    throw new Error("cmsFetch called without CMS_PUBLIC_URL");
+  }
   try {
     return await fetch(`${base}${path}`, {
       next: { revalidate: REVALIDATE, tags },
@@ -28,6 +70,9 @@ async function cmsFetch(path: string, tags: string[]): Promise<Response> {
 }
 
 export async function getSitePayload(): Promise<SitePayload> {
+  if (!cmsBase()) {
+    return FALLBACK_SITE_PAYLOAD;
+  }
   const res = await cmsFetch("/api/public/site", ["cms-site"]);
   if (!res.ok) {
     throw new Error(
@@ -41,6 +86,9 @@ export async function getBlogPosts(options?: {
   limit?: number;
   offset?: number;
 }): Promise<BlogListItemDTO[]> {
+  if (!cmsBase()) {
+    return [];
+  }
   const limit = options?.limit ?? 20;
   const offset = options?.offset ?? 0;
   const res = await cmsFetch(
@@ -57,6 +105,9 @@ export async function getBlogPosts(options?: {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPostDTO | null> {
+  if (!cmsBase()) {
+    return null;
+  }
   const res = await cmsFetch(
     `/api/public/blog/${encodeURIComponent(slug)}`,
     ["cms-blog", `cms-blog-${slug}`]
