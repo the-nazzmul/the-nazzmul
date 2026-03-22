@@ -11,8 +11,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  revalidateTag("cms-site");
-  revalidateTag("cms-blog");
+  revalidateTag("cms-site", "max");
+  revalidateTag("cms-blog", "max");
   revalidatePath("/");
   revalidatePath("/blog");
 
