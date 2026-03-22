@@ -12,7 +12,19 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 
-const HeaderSection = () => {
+export type HeaderSectionProps = {
+  logoUrl: string;
+  resumeUrl: string;
+  blogNavLabel: string;
+  heroName: string;
+};
+
+const HeaderSection = ({
+  logoUrl,
+  resumeUrl,
+  blogNavLabel,
+  heroName,
+}: HeaderSectionProps) => {
   const handleScroll = (
     e: { preventDefault: () => void },
     sectionId: string
@@ -32,8 +44,8 @@ const HeaderSection = () => {
       <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3 lg:px-2.5">
         <div>
           <Image
-            src="/the-nazzmul.png"
-            alt="Nazmul Hussain"
+            src={logoUrl}
+            alt={heroName}
             width={40}
             height={40}
           />
@@ -67,12 +79,12 @@ const HeaderSection = () => {
           >
             Contact
           </Link>
+          <Link href="/blog" className="nav-item">
+            {blogNavLabel}
+          </Link>
         </div>
         <div className="hidden md:block">
-          <Link
-            href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing"
-            target="_blank"
-          >
+          <Link href={resumeUrl} target="_blank">
             <Button>Resume</Button>
           </Link>
         </div>
@@ -90,13 +102,13 @@ const HeaderSection = () => {
               <SheetHeader>
                 <SheetTitle className="p-1.5 flex gap-2 items-center">
                   <Image
-                    src="/the-nazzmul.png"
-                    alt="Nazmul Hussain"
+                    src={logoUrl}
+                    alt={heroName}
                     width={40}
                     height={40}
                   />
                   <div className="font-serif text-xl uppercase font-semibold tracking-widest bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-center text-transparent bg-clip-text">
-                    <span>Nazmul Hussain</span>
+                    <span>{heroName}</span>
                   </div>
                 </SheetTitle>
               </SheetHeader>
@@ -128,8 +140,11 @@ const HeaderSection = () => {
               >
                 Contact
               </Link>
+              <Link href="/blog" className="nav-item-mobile">
+                {blogNavLabel}
+              </Link>
               <Link
-                href="https://drive.google.com/file/d/166mnV5IvjtmR45CYo-Nx4GpV0L0GtKQ_/view?usp=sharing"
+                href={resumeUrl}
                 className="nav-item-mobile"
                 target="_blank"
               >

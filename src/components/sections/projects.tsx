@@ -1,4 +1,3 @@
-import { PROJECTS_DATA } from "@/lib/constants";
 import {
   ArrowUpRightSquareIcon,
   CheckCircle2Icon,
@@ -10,20 +9,25 @@ import SectionHeader from "../section-header";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Card from "../card";
+import type { ProjectDTO } from "@/lib/cms-types";
 
-const ProjectsSection = () => {
+const ProjectsSection = ({
+  projects,
+  sectionTitle,
+  sectionDescription,
+}: {
+  projects: ProjectDTO[];
+  sectionTitle: string;
+  sectionDescription: string;
+}) => {
   return (
     <section className="py-16  lg:py-20" id="projects">
       <div className="container">
-        <SectionHeader
-          title="Hobby Projects"
-          description="All the projects here were built to solve particular problems I faced
-          in different situations."
-        />
+        <SectionHeader title={sectionTitle} description={sectionDescription} />
         <div className="flex flex-col mt-16 gap-20 md:mt-20">
-          {PROJECTS_DATA.map((project, index) => (
+          {projects.map((project, index) => (
             <Card
-              key={index}
+              key={`${project.title}-${index}`}
               className="sticky"
               style={{
                 top: `calc(72px + ${index * 40}px)`,
@@ -79,6 +83,7 @@ const ProjectsSection = () => {
                         href={project.livesite}
                         target="_blank"
                         className="md:text-xl"
+                        rel="noreferrer"
                       >
                         Live
                       </a>
@@ -89,6 +94,7 @@ const ProjectsSection = () => {
                         href={project.github}
                         target="_blank"
                         className="md:text-xl"
+                        rel="noreferrer"
                       >
                         Codes
                       </a>

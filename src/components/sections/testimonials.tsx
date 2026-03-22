@@ -1,25 +1,33 @@
-import { TESTIMONIALS } from "@/lib/constants";
 import Image from "next/image";
 import SectionHeader from "../section-header";
 import Card from "../card";
 import { Fragment } from "react";
+import type { TestimonialDTO } from "@/lib/cms-types";
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({
+  testimonials,
+  sectionTitle,
+  sectionDescription,
+}: {
+  testimonials: TestimonialDTO[];
+  sectionTitle: string;
+  sectionDescription: string;
+}) => {
   return (
     <section className="pt-16 lg:pt-20">
       <div className="container">
         <SectionHeader
-          title="Testimonials"
-          description="See what people I worked with have to say about my work"
+          title={sectionTitle}
+          description={sectionDescription}
         />
 
         <div className="flex overflow-x-clip [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-16 ">
           <div className="flex flex-none gap-8 pr-8 animate-move-left [animation-duration:90s] hover:[animation-play-state:paused]">
             {[...new Array(2)].fill(0).map((_, index) => (
               <Fragment key={index}>
-                {TESTIMONIALS.map((testimonial, index) => (
+                {testimonials.map((testimonial, tIndex) => (
                   <Card
-                    key={index}
+                    key={`${testimonial.name}-${tIndex}`}
                     className="p-6 md:p-8 md:max-w-md max-w-xs hover:-rotate-3 transition duration-300"
                   >
                     <div className="flex items-center gap-4">

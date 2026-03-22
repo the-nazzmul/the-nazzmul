@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Private CMS app — use `cms/README.md`; commit separately in a private repo if needed
+/cms
+
 # dependencies
 /node_modules
 /.pnp
