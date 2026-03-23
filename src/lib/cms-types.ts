@@ -30,6 +30,8 @@ export type SiteSettingsDTO = {
   footerCopyright: string;
   blogSectionTitle: string;
   blogNavLabel: string;
+  /** Subtitle under the recent-blogs block on the home page (optional). */
+  blogHomeSectionDescription: string | null;
   authorName: string | null;
   authorAvatarUrl: string | null;
 };
@@ -80,6 +82,7 @@ export type BlogListItemDTO = {
   excerpt: string | null;
   coverImageUrl: string | null;
   publishedAt: string | null;
+  tags: string[];
 };
 
 export type BlogPostDTO = {
@@ -91,4 +94,5 @@ export type BlogPostDTO = {
   publishedAt: string | null;
   metaTitle: string | null;
   metaDescription: string | null;
+  tags: string[];
 };

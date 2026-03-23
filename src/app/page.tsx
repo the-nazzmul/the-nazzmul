@@ -4,12 +4,16 @@ import Footer from "@/components/sections/footer";
 import HeaderSection from "@/components/sections/header";
 import HeroSection from "@/components/sections/hero";
 import ProjectsSection from "@/components/sections/projects";
+import RecentBlogsSection from "@/components/sections/recent-blogs";
 import TapeSection from "@/components/sections/tape";
 import TestimonialsSection from "@/components/sections/testimonials";
-import { getSitePayload } from "@/lib/content";
+import { getBlogPosts, getSitePayload } from "@/lib/content";
 
 export default async function Home() {
-  const data = await getSitePayload();
+  const [data, recentPosts] = await Promise.all([
+    getSitePayload(),
+    getBlogPosts({ limit: 3 }),
+  ]);
   const { siteSettings } = data;
 
   return (
@@ -36,6 +40,11 @@ export default async function Home() {
         projects={data.projects}
         sectionTitle={siteSettings.projectsSectionTitle}
         sectionDescription={siteSettings.projectsSectionDescription}
+      />
+      <RecentBlogsSection
+        posts={recentPosts}
+        sectionTitle={siteSettings.blogSectionTitle}
+        sectionDescription={siteSettings.blogHomeSectionDescription}
       />
       <TapeSection words={siteSettings.tapeWords} />
       <TestimonialsSection
