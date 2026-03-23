@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import { CheckIcon, Link2Icon, Share2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,11 +15,11 @@ type Props = {
 
 export function BlogShare({ url, title, description }: Props) {
   const [copied, setCopied] = useState(false);
-  const [canNativeShare, setCanNativeShare] = useState(false);
-
-  useEffect(() => {
-    setCanNativeShare(typeof navigator.share === "function");
-  }, []);
+  const canNativeShare = useSyncExternalStore(
+    () => () => {},
+    () => typeof navigator !== "undefined" && typeof navigator.share === "function",
+    () => false
+  );
 
   const copy = useCallback(async () => {
     try {

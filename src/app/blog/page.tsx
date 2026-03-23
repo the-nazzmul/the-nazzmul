@@ -1,19 +1,24 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRightIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import { getBlogPosts, getSitePayload } from "@/lib/content";
+import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
 import { cn } from "@/lib/utils";
 
 export const revalidate = 120;
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
-  return new Date(iso).toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  try {
+    return new Date(iso).toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch {
+    return null;
+  }
 }
 
 const readMoreClass =
@@ -25,6 +30,9 @@ export default async function BlogIndexPage() {
     getSitePayload(),
   ]);
 
+  const title = site.siteSettings.blogSectionTitle ?? "Blog";
+  const description = site.siteSettings.blogHomeSectionDescription ?? null;
+
   return (
     <div className="min-h-screen bg-gray-900">
       <header className="sticky top-0 z-10 border-b border-white/10 bg-gray-900/90 backdrop-blur-md">
@@ -35,24 +43,20 @@ export default async function BlogIndexPage() {
           >
             ← Back to site
           </Link>
-          <span className="font-serif text-base text-white/90 sm:text-lg">
-            {site.siteSettings.blogSectionTitle}
-          </span>
+          <span className="font-serif text-base text-white/90 sm:text-lg">{title}</span>
           <span className="w-24 sm:w-28" aria-hidden />
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
         <header className="mb-14 max-w-2xl border-b border-white/10 pb-10">
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-white/40 mb-3">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-white/40">
             Journal
           </p>
           <h1 className="font-serif text-4xl font-normal tracking-tight text-white sm:text-5xl">
-            {site.siteSettings.blogSectionTitle}
+            {title}
           </h1>
-          {site.siteSettings.blogHomeSectionDescription ? (
-            <p className="mt-4 text-base leading-relaxed text-white/55">
-              {site.siteSettings.blogHomeSectionDescription}
-            </p>
+          {description ? (
+            <p className="mt-4 text-base leading-relaxed text-white/55">{description}</p>
           ) : null}
         </header>
         {posts.length === 0 ? (
@@ -60,66 +64,75 @@ export default async function BlogIndexPage() {
         ) : (
           <ul className="flex flex-col gap-16 sm:gap-20">
             {posts.map((post) => {
-              const cover = post.coverImageUrl;
-              if (!cover) return null;
+              const coverUrl = getBlogCoverAbsoluteUrl(post.coverImageUrl);
               return (
-                <li key={post.slug}>
-                  <article className="grid gap-8 lg:grid-cols-12 lg:gap-12 lg:items-start">
+              <li key={post.slug}>
+                <article
+                  className={cn(
+                    "grid gap-8 lg:items-start lg:gap-12",
+                    coverUrl ? "lg:grid-cols-12" : "lg:grid-cols-1"
+                  )}
+                >
+                  {coverUrl ? (
                     <Link
-                      href={`/blog/${post.slug}`}
+                      href={`/blog/${encodeURIComponent(post.slug)}`}
                       className="relative block aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 lg:col-span-5"
                     >
-                      <Image
-                        src={cover}
+                      <BlogCoverImg
+                        src={post.coverImageUrl}
                         alt=""
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-[1.02]"
-                        sizes="(max-width: 1024px) 100vw, 42vw"
+                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                       />
                     </Link>
-                    <div className="flex flex-col gap-4 lg:col-span-7 lg:pt-1">
-                      <time className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-                        {formatDate(post.publishedAt) ?? ""}
-                      </time>
-                      <h2 className="font-serif text-3xl font-normal leading-tight text-white sm:text-4xl">
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="transition-colors hover:text-white/85"
-                        >
-                          {post.title}
-                        </Link>
-                      </h2>
-                      {post.excerpt ? (
-                        <p className="max-w-2xl text-base leading-relaxed text-white/55">
-                          {post.excerpt}
-                        </p>
-                      ) : null}
-                      {post.tags.length > 0 ? (
-                        <div className="flex flex-wrap gap-1.5">
-                          {post.tags.map((tag) => (
-                            <Badge
-                              key={tag}
-                              variant="outline"
-                              className="border-white/15 text-white/50 text-xs font-normal"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                      ) : null}
-                      <div className="pt-2">
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className={cn(readMoreClass)}
-                        >
-                          Continue reading
-                          <ArrowUpRightIcon className="size-4" aria-hidden />
-                        </Link>
+                  ) : null}
+                  <div
+                    className={cn(
+                      "flex flex-col gap-4 lg:pt-1",
+                      coverUrl ? "lg:col-span-7" : "lg:col-span-1 max-w-3xl"
+                    )}
+                  >
+                    <time className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
+                      {formatDate(post.publishedAt) ?? ""}
+                    </time>
+                    <h2 className="font-serif text-3xl font-normal leading-tight text-white sm:text-4xl">
+                      <Link
+                        href={`/blog/${encodeURIComponent(post.slug)}`}
+                        className="transition-colors hover:text-white/85"
+                      >
+                        {post.title}
+                      </Link>
+                    </h2>
+                    {post.excerpt ? (
+                      <p className="max-w-2xl text-base leading-relaxed text-white/55">
+                        {post.excerpt}
+                      </p>
+                    ) : null}
+                    {post.tags.length > 0 ? (
+                      <div className="flex flex-wrap gap-1.5">
+                        {post.tags.map((tag) => (
+                          <Badge
+                            key={tag}
+                            variant="outline"
+                            className="border-white/15 text-xs font-normal text-white/50"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
+                    ) : null}
+                    <div className="pt-2">
+                      <Link
+                        href={`/blog/${encodeURIComponent(post.slug)}`}
+                        className={cn(readMoreClass)}
+                      >
+                        Continue reading
+                        <ArrowUpRightIcon className="size-4" aria-hidden />
+                      </Link>
                     </div>
-                  </article>
-                </li>
-              );
+                  </div>
+                </article>
+              </li>
+            );
             })}
           </ul>
         )}

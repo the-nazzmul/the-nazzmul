@@ -1,89 +1,102 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogBody } from "@/components/blog-body";
+import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import { BlogShare } from "@/components/blog-share";
 import { BlogPostTagBadges } from "@/components/blog-post-tags";
-import { getBlogPost, getBlogPosts, getSitePayload } from "@/lib/content";
+import { getBlogPost, getSitePayload } from "@/lib/content";
 import {
+  getBlogCoverAbsoluteUrl,
   getPublicBlogPostUrl,
   getSiteMetadataBase,
-  resolveAbsoluteUrl,
 } from "@/lib/site-url";
 
-/**
- * Blog posts must render on every request so tags and edits from the CMS show up immediately.
- * (ISR + cached fetches were serving stale RSC/HTML without tags after saves.)
- */
+/** Fresh data on each request (CMS edits visible immediately). */
 export const dynamic = "force-dynamic";
 
-type Props = { params: Promise<{ slug: string }> };
+type RouteParams = { slug: string };
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts({ limit: 100 });
-  return posts.map((p) => ({ slug: p.slug }));
+async function resolveParams(
+  params: Promise<RouteParams> | RouteParams
+): Promise<RouteParams> {
+  return Promise.resolve(params);
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPost(slug);
-  if (!post?.coverImageUrl?.trim()) return { title: "Post" };
+type PageProps = { params: Promise<RouteParams> | RouteParams };
 
-  const base = getSiteMetadataBase();
-  const canonical = base
-    ? new URL(`/blog/${encodeURIComponent(slug)}`, base).toString()
-    : undefined;
-  const title = post.metaTitle ?? post.title;
-  const description = post.metaDescription ?? post.excerpt ?? undefined;
-  const ogImage = resolveAbsoluteUrl(post.coverImageUrl);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const { slug } = await resolveParams(params);
+    if (!slug?.trim()) return { title: "Blog" };
 
-  return {
-    title,
-    description,
-    alternates: canonical ? { canonical } : undefined,
-    openGraph: {
-      type: "article",
-      url: canonical,
+    const post = await getBlogPost(slug);
+    if (!post) return { title: "Post" };
+
+    const base = getSiteMetadataBase();
+    let canonical: string | undefined;
+    try {
+      canonical = base
+        ? new URL(`/blog/${encodeURIComponent(slug)}`, base).toString()
+        : undefined;
+    } catch {
+      canonical = undefined;
+    }
+
+    const title = post.metaTitle ?? post.title;
+    const description = post.metaDescription ?? post.excerpt ?? undefined;
+    const ogImage = getBlogCoverAbsoluteUrl(post.coverImageUrl);
+
+    return {
       title,
       description,
-      publishedTime: post.publishedAt ?? undefined,
-      ...(ogImage
-        ? {
-            images: [
-              {
-                url: ogImage,
-                width: 1200,
-                height: 630,
-                alt: title,
-              },
-            ],
-          }
-        : {}),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      ...(ogImage ? { images: [ogImage] } : {}),
-    },
-  };
+      alternates: canonical ? { canonical } : undefined,
+      openGraph: {
+        type: "article",
+        url: canonical,
+        title,
+        description,
+        publishedTime: post.publishedAt ?? undefined,
+        ...(ogImage
+          ? {
+              images: [
+                {
+                  url: ogImage,
+                  width: 1200,
+                  height: 630,
+                  alt: title,
+                },
+              ],
+            }
+          : {}),
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        ...(ogImage ? { images: [ogImage] } : {}),
+      },
+    };
+  } catch (e) {
+    console.error("[blog] generateMetadata", e);
+    return { title: "Blog" };
+  }
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await resolveParams(params);
+  if (!slug?.trim()) notFound();
+
   const [post, site] = await Promise.all([
     getBlogPost(slug),
     getSitePayload(),
   ]);
 
-  if (!post || !post.coverImageUrl?.trim()) notFound();
+  if (!post) notFound();
 
   const shareUrl = getPublicBlogPostUrl(slug);
   const shareBlurb = post.excerpt ?? post.metaDescription ?? undefined;
-  const cover = post.coverImageUrl;
-  /** `post.tags` is `string[]` from CMS JSON (`tags` column is `text[]` in Postgres). */
-  const tags = post.tags;
+  const tags = Array.isArray(post.tags) ? post.tags : [];
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -109,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
           className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-white/45"
           aria-label="Breadcrumb"
         >
-          <Link href="/blog" className="hover:text-white/80 transition-colors">
+          <Link href="/blog" className="transition-colors hover:text-white/80">
             {site.siteSettings.blogSectionTitle}
           </Link>
           <span className="text-white/25" aria-hidden>
@@ -140,18 +153,16 @@ export default async function BlogPostPage({ params }: Props) {
           <hr className="my-4 border-t-2 border-white/5 md:my-5" />
         </header>
 
-        <div className="mb-12 w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
-          <Image
-            src={cover}
-            alt=""
-            width={1920}
-            height={1080}
-            priority
-            sizes="(max-width: 896px) 100vw, 896px"
-            className="h-auto w-full"
-            style={{ width: "100%", height: "auto" }}
-          />
-        </div>
+        {getBlogCoverAbsoluteUrl(post.coverImageUrl) ? (
+          <div className="mb-12 w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
+            <BlogCoverImg
+              src={post.coverImageUrl}
+              alt=""
+              className="h-auto w-full object-cover"
+              priority
+            />
+          </div>
+        ) : null}
 
         <BlogBody content={post.content} />
 

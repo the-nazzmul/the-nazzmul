@@ -1,18 +1,23 @@
 import Link from "next/link";
-import Image from "next/image";
 import SectionHeader from "../section-header";
 import Card from "../card";
 import { Badge } from "../ui/badge";
+import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import { cn } from "@/lib/utils";
 import type { BlogListItemDTO } from "@/lib/cms-types";
+import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
-  return new Date(iso).toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  try {
+    return new Date(iso).toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch {
+    return null;
+  }
 }
 
 const secondaryCtaClass =
@@ -41,23 +46,25 @@ const RecentBlogsSection = ({
         ) : (
           <div className="grid gap-8 mt-12 md:mt-16 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => {
-              const cover = post.coverImageUrl;
-              if (!cover) return null;
+              const coverUrl = getBlogCoverAbsoluteUrl(post.coverImageUrl);
               return (
                 <Card
                   key={post.slug}
                   className="group flex flex-col overflow-hidden p-0 transition-shadow duration-300 hover:shadow-lg hover:shadow-black/20"
                 >
-                  <Link href={`/blog/${post.slug}`} className="flex flex-col flex-1 min-h-0 outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-inset">
-                    <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-zinc-900">
-                      <Image
-                        src={cover}
-                        alt=""
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
+                  <Link
+                    href={`/blog/${encodeURIComponent(post.slug)}`}
+                    className="flex flex-col flex-1 min-h-0 outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-inset"
+                  >
+                    {coverUrl ? (
+                      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-zinc-900">
+                        <BlogCoverImg
+                          src={post.coverImageUrl}
+                          alt=""
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                        />
+                      </div>
+                    ) : null}
                     <div className="flex flex-col flex-1 gap-3 p-6 md:p-7 border-t border-white/10">
                       <time className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/40">
                         {formatDate(post.publishedAt) ?? ""}

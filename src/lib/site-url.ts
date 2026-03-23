@@ -12,7 +12,13 @@ export function getSiteMetadataBase(): URL | undefined {
     }
   }
   if (process.env.VERCEL_URL) {
-    return new URL(`https://${process.env.VERCEL_URL}`);
+    const host = process.env.VERCEL_URL.replace(/^https?:\/\//, "").split("/")[0];
+    if (!host) return undefined;
+    try {
+      return new URL(`https://${host}`);
+    } catch {
+      return undefined;
+    }
   }
   return undefined;
 }
@@ -34,6 +40,32 @@ export function resolveAbsoluteUrl(
     }
   }
 }
+
+/**
+ * Absolute URL for `<img>` / Open Graph (CMS cover images are usually https blob URLs).
+ */
+export function getBlogCoverAbsoluteUrl(
+  href: string | null | undefined
+): string | undefined {
+  const raw = href?.trim();
+  if (!raw) return undefined;
+  const resolved = resolveAbsoluteUrl(raw);
+  if (resolved) {
+    try {
+      return new URL(resolved).toString();
+    } catch {
+      return undefined;
+    }
+  }
+  try {
+    return new URL(raw).toString();
+  } catch {
+    return undefined;
+  }
+}
+
+/** @deprecated Use getBlogCoverAbsoluteUrl — kept for any older imports. */
+export const getRenderableImageUrl = getBlogCoverAbsoluteUrl;
 
 export function getPublicBlogPostUrl(slug: string): string {
   const path = `/blog/${encodeURIComponent(slug)}`;
