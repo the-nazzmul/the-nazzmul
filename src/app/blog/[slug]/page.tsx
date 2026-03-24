@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogBody } from "@/components/blog-body";
@@ -18,14 +19,16 @@ export const dynamic = "force-dynamic";
 type RouteParams = { slug: string };
 
 async function resolveParams(
-  params: Promise<RouteParams> | RouteParams
+  params: Promise<RouteParams> | RouteParams,
 ): Promise<RouteParams> {
   return Promise.resolve(params);
 }
 
 type PageProps = { params: Promise<RouteParams> | RouteParams };
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   try {
     const { slug } = await resolveParams(params);
     if (!slug?.trim()) return { title: "Blog" };
@@ -87,10 +90,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await resolveParams(params);
   if (!slug?.trim()) notFound();
 
-  const [post, site] = await Promise.all([
-    getBlogPost(slug),
-    getSitePayload(),
-  ]);
+  const [post, site] = await Promise.all([getBlogPost(slug), getSitePayload()]);
 
   if (!post) notFound();
 
@@ -110,9 +110,15 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
           <Link
             href="/"
-            className="text-sm text-white/50 transition-colors hover:text-white"
+            className="inline-flex items-center rounded-md transition-opacity hover:opacity-85"
           >
-            Home
+            <Image
+              src={site.siteSettings.logoUrl ?? "/the-nazzmul.png"}
+              alt={site.siteSettings.heroName}
+              width={30}
+              height={30}
+            />
+            <span className="sr-only">Home</span>
           </Link>
         </div>
       </header>
@@ -166,11 +172,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <BlogBody content={post.content} />
 
-        <BlogShare
-          url={shareUrl}
-          title={post.title}
-          description={shareBlurb}
-        />
+        <BlogShare url={shareUrl} title={post.title} description={shareBlurb} />
       </article>
     </div>
   );

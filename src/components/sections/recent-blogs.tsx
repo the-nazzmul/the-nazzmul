@@ -1,11 +1,10 @@
-import Link from "next/link";
-import SectionHeader from "../section-header";
-import Card from "../card";
-import { Badge } from "../ui/badge";
 import { BlogCoverImg } from "@/components/blog/blog-cover-img";
-import { cn } from "@/lib/utils";
 import type { BlogListItemDTO } from "@/lib/cms-types";
 import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Card from "../card";
+import SectionHeader from "../section-header";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
@@ -61,7 +60,7 @@ const RecentBlogsSection = ({
                     className="flex flex-col flex-1 min-h-0 outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-inset"
                   >
                     {coverUrl ? (
-                      <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-zinc-900">
+                      <div className="relative aspect-16/10 w-full shrink-0 overflow-hidden bg-zinc-900">
                         <BlogCoverImg
                           src={post.coverImageUrl}
                           alt=""

@@ -27,7 +27,7 @@ const HeaderSection = ({
 }: HeaderSectionProps) => {
   const handleScroll = (
     e: { preventDefault: () => void },
-    sectionId: string
+    sectionId: string,
   ) => {
     e.preventDefault();
     const section = document.getElementById(sectionId);
@@ -43,12 +43,7 @@ const HeaderSection = ({
     <nav className="flex fixed z-50 w-full md:top-3 top-1.5">
       <div className="lg:container lg:mx-auto w-full flex items-center justify-between border-white/15 rounded-lg bg-white/10 backdrop-blur py-1.5 px-2.5 border mx-1.5 md:mx-3 lg:px-2.5">
         <div>
-          <Image
-            src={logoUrl}
-            alt={heroName}
-            width={40}
-            height={40}
-          />
+          <Image src={logoUrl} alt={heroName} width={40} height={40} />
         </div>
         <div className="md:flex gap-1 hidden">
           <Link
@@ -93,7 +88,7 @@ const HeaderSection = ({
             <SheetTrigger asChild>
               <Button
                 size="sm"
-                className="bg-gray-900 text-white hover:bg-white/5 bg-white/10 hover:text-white outline outline-white/60 p-2 "
+                className="bg-gray-900 text-white hover:bg-white/5 hover:text-white outline outline-white/60 p-2 "
               >
                 <MenuIcon className="size-6" />
               </Button>
@@ -101,13 +96,8 @@ const HeaderSection = ({
             <SheetContent className="flex flex-col gap-4 backdrop-blur bg-transparent border-white/50 pt-24 lg:hidden">
               <SheetHeader>
                 <SheetTitle className="p-1.5 flex gap-2 items-center">
-                  <Image
-                    src={logoUrl}
-                    alt={heroName}
-                    width={40}
-                    height={40}
-                  />
-                  <div className="font-serif text-xl uppercase font-semibold tracking-widest bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 text-center text-transparent bg-clip-text">
+                  <Image src={logoUrl} alt={heroName} width={40} height={40} />
+                  <div className="font-serif text-xl uppercase font-semibold tracking-widest bg-linear-to-r from-gray-200 via-gray-400 to-gray-600 text-center text-transparent bg-clip-text">
                     <span>{heroName}</span>
                   </div>
                 </SheetTitle>
