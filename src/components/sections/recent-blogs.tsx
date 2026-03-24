@@ -33,8 +33,8 @@ const RecentBlogsSection = ({
   sectionDescription: string | null;
 }) => {
   return (
-    <section className="py-16 lg:py-20" id="blog">
-      <div className="container max-w-6xl">
+    <section className="py-16 lg:py-20 container" id="blog">
+      <div className="">
         <SectionHeader
           title={sectionTitle}
           description={sectionDescription ?? undefined}
@@ -44,7 +44,7 @@ const RecentBlogsSection = ({
             No posts published yet. Check back soon.
           </p>
         ) : (
-          <div className="grid gap-4 mt-12 md:mt-16 sm:grid-cols-1 lg:grid-cols-3 container">
+          <div className="grid gap-4 mt-12 md:mt-16 sm:grid-cols-1 lg:grid-cols-3">
             {posts.map((post, index) => {
               const coverUrl = getBlogCoverAbsoluteUrl(post.coverImageUrl);
               return (

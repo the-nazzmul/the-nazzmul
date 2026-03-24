@@ -21,6 +21,11 @@ function formatDate(iso: string | null) {
   }
 }
 
+function truncateText(text: string, maxChars: number) {
+  if (text.length <= maxChars) return text;
+  return `${text.slice(0, maxChars).trimEnd()}...`;
+}
+
 const readMoreClass =
   "inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white";
 
@@ -43,12 +48,14 @@ export default async function BlogIndexPage() {
           >
             ← Back to site
           </Link>
-          <span className="font-serif text-base text-white/90 sm:text-lg">{title}</span>
+          <span className="font-serif text-base text-white/90 sm:text-lg">
+            {title}
+          </span>
           <span className="w-24 sm:w-28" aria-hidden />
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-        <header className="mb-14 max-w-2xl border-b border-white/10 pb-10">
+        <header className="mb-14 border-b border-white/10 pb-10">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.25em] text-white/40">
             Journal
           </p>
@@ -56,83 +63,85 @@ export default async function BlogIndexPage() {
             {title}
           </h1>
           {description ? (
-            <p className="mt-4 text-base leading-relaxed text-white/55">{description}</p>
+            <p className="mt-4 text-base leading-relaxed text-white/55">
+              {description}
+            </p>
           ) : null}
         </header>
         {posts.length === 0 ? (
           <p className="text-white/45">No posts published yet.</p>
         ) : (
-          <ul className="flex flex-col gap-16 sm:gap-20">
+          <ul className="flex flex-col gap-4 md:gap-8 ">
             {posts.map((post) => {
               const coverUrl = getBlogCoverAbsoluteUrl(post.coverImageUrl);
               return (
-              <li key={post.slug}>
-                <article
-                  className={cn(
-                    "grid gap-8 lg:items-start lg:gap-12",
-                    coverUrl ? "lg:grid-cols-12" : "lg:grid-cols-1"
-                  )}
-                >
-                  {coverUrl ? (
-                    <Link
-                      href={`/blog/${encodeURIComponent(post.slug)}`}
-                      className="relative block aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 lg:col-span-5"
-                    >
-                      <BlogCoverImg
-                        src={post.coverImageUrl}
-                        alt=""
-                        className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
-                      />
-                    </Link>
-                  ) : null}
-                  <div
+                <li key={post.slug}>
+                  <article
                     className={cn(
-                      "flex flex-col gap-4 lg:pt-1",
-                      coverUrl ? "lg:col-span-7" : "lg:col-span-1 max-w-3xl"
+                      "grid gap-6 border border-white/10 rounded-3xl p-4 lg:gap-8 lg:items-stretch",
+                      coverUrl ? "lg:grid-cols-2" : "lg:grid-cols-1",
                     )}
                   >
-                    <time className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-                      {formatDate(post.publishedAt) ?? ""}
-                    </time>
-                    <h2 className="font-serif text-3xl font-normal leading-tight text-white sm:text-4xl">
+                    {coverUrl ? (
                       <Link
                         href={`/blog/${encodeURIComponent(post.slug)}`}
-                        className="transition-colors hover:text-white/85"
+                        className="relative block h-64 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 lg:h-full"
                       >
-                        {post.title}
+                        <BlogCoverImg
+                          src={post.coverImageUrl}
+                          alt=""
+                          className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                        />
                       </Link>
-                    </h2>
-                    {post.excerpt ? (
-                      <p className="max-w-2xl text-base leading-relaxed text-white/55">
-                        {post.excerpt}
-                      </p>
                     ) : null}
-                    {post.tags.length > 0 ? (
-                      <div className="flex flex-wrap gap-1.5">
-                        {post.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="outline"
-                            className="border-white/15 text-xs font-normal text-white/50"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
+                    <div
+                      className={cn(
+                        "flex h-full flex-col gap-4",
+                        coverUrl ? "" : "max-w-3xl",
+                      )}
+                    >
+                      <time className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
+                        {formatDate(post.publishedAt) ?? ""}
+                      </time>
+                      <h2 className="font-serif text-3xl font-normal leading-tight text-white sm:text-4xl">
+                        <Link
+                          href={`/blog/${encodeURIComponent(post.slug)}`}
+                          className="transition-colors hover:text-white/85"
+                        >
+                          {post.title}
+                        </Link>
+                      </h2>
+                      {post.excerpt ? (
+                        <p className="max-w-2xl text-base leading-relaxed text-white/55">
+                          {truncateText(post.excerpt, 180)}
+                        </p>
+                      ) : null}
+                      {post.tags.length > 0 ? (
+                        <div className="flex flex-wrap gap-1.5">
+                          {post.tags.map((tag) => (
+                            <Badge
+                              key={tag}
+                              variant="outline"
+                              className="border-white/15 text-xs font-normal text-white/50"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      ) : null}
+                      <div className="pt-2 mt-auto">
+                        <Link
+                          href={`/blog/${encodeURIComponent(post.slug)}`}
+                          className={cn(readMoreClass)}
+                        >
+                          Continue reading
+                          <ArrowUpRightIcon className="size-4" aria-hidden />
+                        </Link>
                       </div>
-                    ) : null}
-                    <div className="pt-2">
-                      <Link
-                        href={`/blog/${encodeURIComponent(post.slug)}`}
-                        className={cn(readMoreClass)}
-                      >
-                        Continue reading
-                        <ArrowUpRightIcon className="size-4" aria-hidden />
-                      </Link>
                     </div>
-                  </div>
-                </article>
-              </li>
-            );
+                  </article>
+                </li>
+              );
             })}
           </ul>
         )}
