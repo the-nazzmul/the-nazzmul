@@ -44,13 +44,17 @@ const RecentBlogsSection = ({
             No posts published yet. Check back soon.
           </p>
         ) : (
-          <div className="grid gap-8 mt-12 md:mt-16 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => {
+          <div className="grid gap-4 mt-12 md:mt-16 sm:grid-cols-1 lg:grid-cols-3 container">
+            {posts.map((post, index) => {
               const coverUrl = getBlogCoverAbsoluteUrl(post.coverImageUrl);
               return (
                 <Card
-                  key={post.slug}
-                  className="group flex flex-col overflow-hidden p-0 transition-shadow duration-300 hover:shadow-lg hover:shadow-black/20"
+                  key={`${post.title}-${index}`}
+                  className="sticky"
+                  style={{
+                    top: `calc(72px + ${index * 40}px)`,
+                  }}
+                  // className="group flex flex-col overflow-hidden p-0 transition-shadow duration-300 hover:shadow-lg hover:shadow-black/20"
                 >
                   <Link
                     href={`/blog/${encodeURIComponent(post.slug)}`}
@@ -76,19 +80,6 @@ const RecentBlogsSection = ({
                         <p className="text-sm leading-relaxed text-white/55 line-clamp-3">
                           {post.excerpt}
                         </p>
-                      ) : null}
-                      {post.tags.length > 0 ? (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {post.tags.map((tag) => (
-                            <Badge
-                              key={tag}
-                              variant="outline"
-                              className="border-white/15 text-white/50 text-[11px] font-normal"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
                       ) : null}
                     </div>
                   </Link>

@@ -22,7 +22,7 @@ const ProjectsSection = ({
 }) => {
   return (
     <section className="py-16  lg:py-20" id="projects">
-      <div className="container">
+      <div className="container mx-auto">
         <SectionHeader title={sectionTitle} description={sectionDescription} />
         <div className="flex flex-col mt-16 gap-20 md:mt-20">
           {projects.map((project, index) => (
