@@ -5,7 +5,7 @@ export function BlogPostTagBadges({ tags }: { tags: string[] }) {
   if (!tags.length) return null;
   return (
     <div
-      className="flex flex-wrap gap-x-1.5 gap-y-2"
+      className="flex flex-wrap gap-x-1.5 gap-y-2 mt-5"
       aria-label="Post tags"
       role="list"
     >

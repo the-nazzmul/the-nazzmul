@@ -12,6 +12,7 @@ import {
   getPublicBlogPostUrl,
   getSiteMetadataBase,
 } from "@/lib/site-url";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 /** Fresh data on each request (CMS edits visible immediately). */
 export const dynamic = "force-dynamic";
@@ -104,9 +105,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-4 sm:px-8">
           <Link
             href="/blog"
-            className="text-sm text-white/50 transition-colors hover:text-white"
+            className="text-lg text-white/50 transition-colors hover:text-white flex items-center gap-2"
           >
-            ← {site.siteSettings.blogSectionTitle}
+            <IoMdArrowRoundBack /> {site.siteSettings.blogSectionTitle}
           </Link>
           <Link
             href="/"

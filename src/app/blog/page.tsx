@@ -5,6 +5,7 @@ import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import { getBlogPosts, getSitePayload } from "@/lib/content";
 import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
 import { cn } from "@/lib/utils";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export const revalidate = 120;
 
@@ -44,11 +45,11 @@ export default async function BlogIndexPage() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
           <Link
             href="/"
-            className="text-sm text-white/50 transition-colors hover:text-white"
+            className="text-lg text-white/50 transition-colors hover:text-white flex items-center gap-2"
           >
-            ← Back to site
+            <IoMdArrowRoundBack /> Home
           </Link>
-          <span className="font-serif text-base text-white/90 sm:text-lg">
+          <span className="font-serif text-base text-white/90 sm:text-2xl">
             {title}
           </span>
           <span className="w-24 sm:w-28" aria-hidden />
