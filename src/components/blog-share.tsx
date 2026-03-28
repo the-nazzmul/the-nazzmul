@@ -1,20 +1,47 @@
 "use client";
 
 import { useCallback, useState, useSyncExternalStore } from "react";
-import { CheckIcon, Link2Icon, Share2Icon, XIcon } from "lucide-react";
+import { CheckIcon, Link2Icon, Share2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FaFacebook, FaLinkedin, FaShare, FaXTwitter } from "react-icons/fa6";
 
 const actionClass =
   "inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border border-white/20 bg-zinc-800/90 px-3.5 text-xs font-medium text-zinc-100 shadow-sm transition-colors hover:border-white/30 hover:bg-zinc-700/95 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900";
 
+type ShareChannel =
+  | "copy"
+  | "native"
+  | "twitter"
+  | "linkedin"
+  | "facebook";
+
+function postShareCount(
+  cmsOrigin: string | null,
+  slug: string,
+  channel: ShareChannel,
+) {
+  if (!cmsOrigin?.trim() || !slug?.trim()) return;
+  const base = cmsOrigin.replace(/\/$/, "");
+  const url = `${base}/api/public/blog/${encodeURIComponent(slug.trim())}/share`;
+  void fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ channel }),
+    mode: "cors",
+    credentials: "omit",
+    keepalive: true,
+  }).catch(() => {});
+}
+
 type Props = {
+  slug: string;
+  cmsOrigin: string | null;
   url: string;
   title: string;
   description?: string;
 };
 
-export function BlogShare({ url, title, description }: Props) {
+export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
   const [copied, setCopied] = useState(false);
   const canNativeShare = useSyncExternalStore(
     () => () => {},
@@ -27,11 +54,12 @@ export function BlogShare({ url, title, description }: Props) {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
+      postShareCount(cmsOrigin, slug, "copy");
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
     }
-  }, [url]);
+  }, [url, cmsOrigin, slug]);
 
   const shareNative = useCallback(async () => {
     if (!navigator.share) return;
@@ -41,10 +69,11 @@ export function BlogShare({ url, title, description }: Props) {
         text: description || title,
         url,
       });
+      postShareCount(cmsOrigin, slug, "native");
     } catch {
       /* user cancelled or share failed */
     }
-  }, [url, title, description]);
+  }, [url, title, description, cmsOrigin, slug]);
 
   const enc = encodeURIComponent;
   const twitter = `https://twitter.com/intent/tweet?url=${enc(url)}&text=${enc(title)}`;
@@ -90,6 +119,7 @@ export function BlogShare({ url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
+            onClick={() => postShareCount(cmsOrigin, slug, "twitter")}
           >
             <FaXTwitter />
           </a>
@@ -98,6 +128,7 @@ export function BlogShare({ url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
+            onClick={() => postShareCount(cmsOrigin, slug, "linkedin")}
           >
             <FaLinkedin />
           </a>
@@ -106,6 +137,7 @@ export function BlogShare({ url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
+            onClick={() => postShareCount(cmsOrigin, slug, "facebook")}
           >
             <FaFacebook />
           </a>

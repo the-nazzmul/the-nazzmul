@@ -4,8 +4,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogBody } from "@/components/blog-body";
 import { BlogCoverImg } from "@/components/blog/blog-cover-img";
+import { BlogPostViewTracker } from "@/components/blog-post-view-tracker";
 import { BlogShare } from "@/components/blog-share";
 import { BlogPostTagBadges } from "@/components/blog-post-tags";
+import { getCmsPublicOrigin } from "@/lib/blog-cms";
 import { getBlogPost, getSitePayload } from "@/lib/content";
 import {
   getBlogCoverAbsoluteUrl,
@@ -98,6 +100,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const shareUrl = getPublicBlogPostUrl(slug);
   const shareBlurb = post.excerpt ?? post.metaDescription ?? undefined;
   const tags = Array.isArray(post.tags) ? post.tags : [];
+  const cmsOrigin = getCmsPublicOrigin();
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -125,6 +128,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </header>
 
       <article className="mx-auto w-full max-w-6xl px-5 pb-20 pt-8 sm:px-8 sm:pt-12">
+        <BlogPostViewTracker slug={slug} cmsOrigin={cmsOrigin} />
         <nav
           className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-white/45"
           aria-label="Breadcrumb"
@@ -173,7 +177,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <BlogBody content={post.content} />
 
-        <BlogShare url={shareUrl} title={post.title} description={shareBlurb} />
+        <BlogShare
+          slug={slug}
+          cmsOrigin={cmsOrigin}
+          url={shareUrl}
+          title={post.title}
+          description={shareBlurb}
+        />
       </article>
     </div>
   );

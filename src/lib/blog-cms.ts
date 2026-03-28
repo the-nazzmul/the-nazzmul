@@ -19,6 +19,11 @@ function cmsOrigin(): string | null {
   }
 }
 
+/** Resolved CMS origin (from `CMS_PUBLIC_URL`). Pass into client components for analytics; not available in the browser unless passed as a prop. */
+export function getCmsPublicOrigin(): string | null {
+  return cmsOrigin();
+}
+
 function safeStr(v: unknown, fallback = ""): string {
   if (v == null) return fallback;
   if (typeof v === "string") return v;
