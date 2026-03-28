@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Calistoga } from "next/font/google";
 import "./globals.css";
+import "highlight.js/styles/github-dark.css";
 import { twMerge } from "tailwind-merge";
 import { getSitePayload } from "@/lib/content";
 import { getSiteMetadataBase } from "@/lib/site-url";
