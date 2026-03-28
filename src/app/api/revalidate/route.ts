@@ -15,6 +15,7 @@ export async function POST(request: Request) {
   revalidateTag("cms-blog", "max");
   revalidatePath("/");
   revalidatePath("/blog");
+  revalidatePath("/projects");
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

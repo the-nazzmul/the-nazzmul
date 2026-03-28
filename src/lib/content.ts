@@ -7,8 +7,6 @@ import { normalizeProjectsList } from "@/lib/project-normalize";
 import { findProjectIndexBySlug } from "@/lib/project-slug";
 export { getBlogPost, getBlogPosts } from "@/lib/blog-cms";
 
-const REVALIDATE = 120;
-
 /** Used when CMS_PUBLIC_URL is unset (e.g. Vercel build before env is configured). */
 const FALLBACK_SITE_PAYLOAD: SitePayload = {
   siteSettings: {
@@ -28,8 +26,6 @@ const FALLBACK_SITE_PAYLOAD: SitePayload = {
     tapeWords: ["—"],
     projectsSectionTitle: "Projects",
     projectsSectionDescription: "",
-    featuredProjectsSectionTitle: "Featured Projects",
-    featuredProjectsSectionDescription: "",
     allProjectsPageTitle: "All projects",
     allProjectsPageDescription: null,
     testimonialsSectionTitle: "Testimonials",
@@ -70,7 +66,8 @@ async function cmsFetch(path: string, tags: string[]): Promise<Response> {
   }
   try {
     return await fetch(`${base}${path}`, {
-      next: { revalidate: REVALIDATE, tags },
+      cache: "no-store",
+      next: { tags },
     });
   } catch (e) {
     throw new Error(`CMS ${path} request failed`, { cause: e });
@@ -100,6 +97,10 @@ export async function getSitePayload(): Promise<SitePayload> {
       ...raw,
       siteSettings: {
         ...raw.siteSettings,
+        allProjectsPageTitle:
+          raw.siteSettings.allProjectsPageTitle ?? "All projects",
+        allProjectsPageDescription:
+          raw.siteSettings.allProjectsPageDescription ?? null,
         blogHomeSectionDescription:
           raw.siteSettings.blogHomeSectionDescription ?? null,
       },
@@ -110,36 +111,16 @@ export async function getSitePayload(): Promise<SitePayload> {
   }
 }
 
-function pickTrimmed(s: string | null | undefined): string | null {
-  const t = s?.trim();
-  return t ? t : null;
-}
-
 function normalizeSiteSettings(raw: SiteSettingsDTO): SiteSettingsDTO {
-  const legacyTitle = raw.projectsSectionTitle?.trim() || "Projects";
-  const legacyDesc = raw.projectsSectionDescription ?? "";
-
-  const featuredProjectsSectionTitle =
-    raw.featuredProjectsSectionTitle?.trim() ||
-    legacyTitle ||
-    "Featured Projects";
-  const featuredProjectsSectionDescription =
-    raw.featuredProjectsSectionDescription ?? legacyDesc;
-
-  const allProjectsPageTitle =
-    raw.allProjectsPageTitle?.trim() || "All projects";
-  const allProjectsPageDescription =
-    pickTrimmed(raw.allProjectsPageDescription) ??
-    pickTrimmed(legacyDesc);
-
+  const projectsDesc =
+    typeof raw.projectsSectionDescription === "string"
+      ? raw.projectsSectionDescription
+      : "";
   return {
     ...raw,
-    featuredProjectsSectionTitle,
-    featuredProjectsSectionDescription,
-    allProjectsPageTitle,
-    allProjectsPageDescription,
-    projectsSectionTitle: legacyTitle,
-    projectsSectionDescription: legacyDesc,
+    projectsSectionTitle: raw.projectsSectionTitle?.trim() || "Projects",
+    projectsSectionDescription: projectsDesc,
+    allProjectsPageTitle: raw.allProjectsPageTitle?.trim() || "All projects",
     blogHomeSectionDescription: raw.blogHomeSectionDescription ?? null,
   };
 }

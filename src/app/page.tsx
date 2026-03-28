@@ -40,12 +40,8 @@ export default async function Home() {
       <ProjectsSection
         allProjects={data.projects}
         featuredProjects={featuredProjects}
-        sectionTitle={
-          siteSettings.featuredProjectsSectionTitle ?? "Featured Projects"
-        }
-        sectionDescription={
-          siteSettings.featuredProjectsSectionDescription ?? ""
-        }
+        sectionTitle={siteSettings.projectsSectionTitle}
+        sectionDescription={siteSettings.projectsSectionDescription}
       />
       <RecentBlogsSection
         posts={recentPosts}

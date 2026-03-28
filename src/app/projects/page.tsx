@@ -5,8 +5,6 @@ import { ProjectsDirectory } from "@/components/projects/projects-directory";
 import { getSitePayload } from "@/lib/content";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-export const revalidate = 120;
-
 function ProjectsFallback() {
   return (
     <p className="text-white/45" role="status">
@@ -17,8 +15,8 @@ function ProjectsFallback() {
 
 export default async function ProjectsIndexPage() {
   const site = await getSitePayload();
-  const title = site.siteSettings.allProjectsPageTitle ?? "All projects";
-  const description = site.siteSettings.allProjectsPageDescription ?? null;
+  const { siteSettings } = site;
+  const title = siteSettings.allProjectsPageTitle ?? "All projects";
   const projects = site.projects;
 
   return (
@@ -43,8 +41,8 @@ export default async function ProjectsIndexPage() {
             aria-label="Home"
           >
             <Image
-              src={site.siteSettings.logoUrl ?? "/the-nazzmul.png"}
-              alt={site.siteSettings.heroName}
+              src={siteSettings.logoUrl ?? "/the-nazzmul.png"}
+              alt={siteSettings.heroName}
               width={30}
               height={30}
             />
@@ -59,9 +57,9 @@ export default async function ProjectsIndexPage() {
           <h1 className="font-serif text-4xl font-normal tracking-tight text-white sm:text-5xl">
             {title}
           </h1>
-          {description ? (
-            <p className="mt-4 text-base leading-relaxed text-white/55">
-              {description}
+          {siteSettings.allProjectsPageDescription ? (
+            <p className="mt-4 text-base leading-relaxed text-white/55 whitespace-pre-line">
+              {siteSettings.allProjectsPageDescription}
             </p>
           ) : null}
         </header>
