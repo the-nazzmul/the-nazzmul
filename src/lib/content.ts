@@ -1,4 +1,10 @@
-import type { SitePayload } from "@/lib/cms-types";
+import type {
+  ProjectDTO,
+  SitePayload,
+  SiteSettingsDTO,
+} from "@/lib/cms-types";
+import { normalizeProjectsList } from "@/lib/project-normalize";
+import { findProjectIndexBySlug } from "@/lib/project-slug";
 export { getBlogPost, getBlogPosts } from "@/lib/blog-cms";
 
 const REVALIDATE = 120;
@@ -22,6 +28,10 @@ const FALLBACK_SITE_PAYLOAD: SitePayload = {
     tapeWords: ["—"],
     projectsSectionTitle: "Projects",
     projectsSectionDescription: "",
+    featuredProjectsSectionTitle: "Featured Projects",
+    featuredProjectsSectionDescription: "",
+    allProjectsPageTitle: "All projects",
+    allProjectsPageDescription: null,
     testimonialsSectionTitle: "Testimonials",
     testimonialsSectionDescription: "",
     aboutSectionTitle: "About",
@@ -86,17 +96,72 @@ export async function getSitePayload(): Promise<SitePayload> {
     } catch {
       return FALLBACK_SITE_PAYLOAD;
     }
-    return {
+    return normalizeSitePayload({
       ...raw,
       siteSettings: {
         ...raw.siteSettings,
         blogHomeSectionDescription:
           raw.siteSettings.blogHomeSectionDescription ?? null,
       },
-    };
+    });
   } catch (e) {
     console.error("[cms] getSitePayload", e);
     return FALLBACK_SITE_PAYLOAD;
   }
+}
+
+function pickTrimmed(s: string | null | undefined): string | null {
+  const t = s?.trim();
+  return t ? t : null;
+}
+
+function normalizeSiteSettings(raw: SiteSettingsDTO): SiteSettingsDTO {
+  const legacyTitle = raw.projectsSectionTitle?.trim() || "Projects";
+  const legacyDesc = raw.projectsSectionDescription ?? "";
+
+  const featuredProjectsSectionTitle =
+    raw.featuredProjectsSectionTitle?.trim() ||
+    legacyTitle ||
+    "Featured Projects";
+  const featuredProjectsSectionDescription =
+    raw.featuredProjectsSectionDescription ?? legacyDesc;
+
+  const allProjectsPageTitle =
+    raw.allProjectsPageTitle?.trim() || "All projects";
+  const allProjectsPageDescription =
+    pickTrimmed(raw.allProjectsPageDescription) ??
+    pickTrimmed(legacyDesc);
+
+  return {
+    ...raw,
+    featuredProjectsSectionTitle,
+    featuredProjectsSectionDescription,
+    allProjectsPageTitle,
+    allProjectsPageDescription,
+    projectsSectionTitle: legacyTitle,
+    projectsSectionDescription: legacyDesc,
+    blogHomeSectionDescription: raw.blogHomeSectionDescription ?? null,
+  };
+}
+
+function normalizeSitePayload(raw: SitePayload): SitePayload {
+  return {
+    ...raw,
+    siteSettings: normalizeSiteSettings(raw.siteSettings),
+    projects: normalizeProjectsList(raw.projects),
+  };
+}
+
+export function getFeaturedProjects(projects: ProjectDTO[]): ProjectDTO[] {
+  return projects.filter((p) => p.featured);
+}
+
+export async function getProjectBySlug(
+  slug: string,
+): Promise<ProjectDTO | null> {
+  const payload = await getSitePayload();
+  const idx = findProjectIndexBySlug(payload.projects, slug);
+  if (idx < 0) return null;
+  return payload.projects[idx] ?? null;
 }
 

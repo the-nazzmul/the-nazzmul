@@ -1,10 +1,11 @@
+import { ArrowRight } from "lucide-react";
 import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import type { BlogListItemDTO } from "@/lib/cms-types";
 import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Card from "../card";
 import SectionHeader from "../section-header";
+import { Button } from "../ui/button";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
@@ -18,9 +19,6 @@ function formatDate(iso: string | null) {
     return null;
   }
 }
-
-const secondaryCtaClass =
-  "inline-flex h-11 items-center justify-center rounded-lg border border-white/20 bg-zinc-800/80 px-8 text-sm font-semibold text-zinc-100 transition-colors hover:border-white/35 hover:bg-zinc-700/90 hover:text-white focus-visible:outline focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900";
 
 const RecentBlogsSection = ({
   posts,
@@ -88,8 +86,11 @@ const RecentBlogsSection = ({
           </div>
         )}
         <div className="flex justify-center mt-12 md:mt-16">
-          <Link href="/blog" className={cn(secondaryCtaClass)}>
-            View all posts
+          <Link href="/blog">
+            <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
+              <ArrowRight className="size-4" aria-hidden />
+              <span className="font-semibold">View all posts</span>
+            </Button>
           </Link>
         </div>
       </div>

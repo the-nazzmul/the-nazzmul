@@ -43,3 +43,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Bundled CMS repo (tracked in its own repository)
+/the-nazzmul-portfolio-studio
+
+# Cursor editor / agent state
+.cursor/

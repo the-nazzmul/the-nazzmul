@@ -13,8 +13,17 @@ export type SiteSettingsDTO = {
   exploreWorkLabel: string;
   downloadResumeLabel: string;
   tapeWords: string[];
+  /** @deprecated Prefer featuredProjectsSectionTitle; still sent by older CMS payloads. */
   projectsSectionTitle: string;
+  /** @deprecated Prefer featuredProjectsSectionDescription. */
   projectsSectionDescription: string;
+  /** Home `#projects` block heading (optional in API; normalized with legacy fallbacks). */
+  featuredProjectsSectionTitle?: string;
+  featuredProjectsSectionDescription?: string;
+  /** `/projects` index page title (optional in API; normalized). */
+  allProjectsPageTitle?: string;
+  /** `/projects` index description only (optional in API; normalized). */
+  allProjectsPageDescription?: string | null;
   testimonialsSectionTitle: string;
   testimonialsSectionDescription: string;
   aboutSectionTitle: string;
@@ -49,6 +58,12 @@ export type ProjectDTO = {
   image: string;
   github: string;
   livesite: string;
+  /** When true, project appears in the home “Projects” section. */
+  featured: boolean;
+  /** Optional CMS slug; URL segment is derived from title if omitted. */
+  slug: string | null;
+  /** Optional filter facet; omit from UI when all null. */
+  category: string | null;
 };
 
 export type TestimonialDTO = {

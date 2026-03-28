@@ -7,7 +7,7 @@ import ProjectsSection from "@/components/sections/projects";
 import RecentBlogsSection from "@/components/sections/recent-blogs";
 import TapeSection from "@/components/sections/tape";
 import TestimonialsSection from "@/components/sections/testimonials";
-import { getBlogPosts, getSitePayload } from "@/lib/content";
+import { getBlogPosts, getFeaturedProjects, getSitePayload } from "@/lib/content";
 
 export default async function Home() {
   const [data, recentPosts] = await Promise.all([
@@ -15,6 +15,7 @@ export default async function Home() {
     getBlogPosts({ limit: 3 }),
   ]);
   const { siteSettings } = data;
+  const featuredProjects = getFeaturedProjects(data.projects);
 
   return (
     <div>
@@ -37,9 +38,14 @@ export default async function Home() {
         resumeUrl={siteSettings.resumeUrl}
       />
       <ProjectsSection
-        projects={data.projects}
-        sectionTitle={siteSettings.projectsSectionTitle}
-        sectionDescription={siteSettings.projectsSectionDescription}
+        allProjects={data.projects}
+        featuredProjects={featuredProjects}
+        sectionTitle={
+          siteSettings.featuredProjectsSectionTitle ?? "Featured Projects"
+        }
+        sectionDescription={
+          siteSettings.featuredProjectsSectionDescription ?? ""
+        }
       />
       <RecentBlogsSection
         posts={recentPosts}

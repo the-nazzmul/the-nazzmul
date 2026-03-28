@@ -102,7 +102,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-gray-900">
       <header className="sticky top-0 z-10 border-b border-white/10 bg-gray-900/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-4 sm:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
           <Link
             href="/blog"
             className="text-lg text-white/50 transition-colors hover:text-white flex items-center gap-2"
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </header>
 
-      <article className="mx-auto w-full max-w-4xl px-5 pb-20 pt-8 sm:px-8 sm:pt-12">
+      <article className="mx-auto w-full max-w-6xl px-5 pb-20 pt-8 sm:px-8 sm:pt-12">
         <nav
           className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-white/45"
           aria-label="Breadcrumb"

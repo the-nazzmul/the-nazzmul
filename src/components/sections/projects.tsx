@@ -1,22 +1,27 @@
 import {
+  ArrowRight,
   ArrowUpRightSquareIcon,
   CheckCircle2Icon,
   CodeSquareIcon,
   PackageOpenIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeader from "../section-header";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Card from "../card";
 import type { ProjectDTO } from "@/lib/cms-types";
+import { getProjectDetailPath } from "@/lib/project-slug";
 
 const ProjectsSection = ({
-  projects,
+  allProjects,
+  featuredProjects,
   sectionTitle,
   sectionDescription,
 }: {
-  projects: ProjectDTO[];
+  allProjects: ProjectDTO[];
+  featuredProjects: ProjectDTO[];
   sectionTitle: string;
   sectionDescription: string;
 }) => {
@@ -24,8 +29,19 @@ const ProjectsSection = ({
     <section className="py-16  lg:py-20" id="projects">
       <div className="container mx-auto">
         <SectionHeader title={sectionTitle} description={sectionDescription} />
-        <div className="flex flex-col mt-16 gap-20 md:mt-20">
-          {projects.map((project, index) => (
+        {featuredProjects.length === 0 ? (
+          <p className="mt-16 text-center text-white/50 md:text-lg max-w-md mx-auto">
+            No featured projects yet.
+          </p>
+        ) : null}
+        <div
+          className={
+            featuredProjects.length > 0
+              ? "flex flex-col mt-16 gap-20 md:mt-20"
+              : "flex flex-col gap-20"
+          }
+        >
+          {featuredProjects.map((project, index) => (
             <Card
               key={`${project.title}-${index}`}
               className="sticky"
@@ -100,17 +116,42 @@ const ProjectsSection = ({
                       </a>
                       <CodeSquareIcon className="size-4" />
                     </Button>
-                    <Button className="inline-flex gap-1 text-base items-center p-2  rounded-lg font-semibold  md:px-8 md:py-4 md:h-12">
-                      <a href="#" target="_blank" className="md:text-xl">
+                    <Button
+                      asChild
+                      className="inline-flex gap-1 text-base items-center p-2  rounded-lg font-semibold  md:px-8 md:py-4 md:h-12"
+                    >
+                      <Link
+                        href={getProjectDetailPath(
+                          allProjects,
+                          (() => {
+                            const i = allProjects.indexOf(project);
+                            if (i >= 0) return i;
+                            return allProjects.findIndex(
+                              (p) =>
+                                p.title === project.title &&
+                                p.year === project.year,
+                            );
+                          })(),
+                        )}
+                        className="inline-flex items-center gap-1 md:text-xl"
+                      >
                         Details
-                      </a>
-                      <PackageOpenIcon className="size-4" />
+                        <PackageOpenIcon className="size-4" aria-hidden />
+                      </Link>
                     </Button>
                   </div>
                 </div>
               </div>
             </Card>
           ))}
+        </div>
+        <div className="mt-16 flex justify-center md:mt-20">
+          <Link href="/projects">
+            <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
+              <ArrowRight className="size-4" aria-hidden />
+              <span className="font-semibold">See more projects</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
