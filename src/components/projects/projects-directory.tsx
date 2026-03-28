@@ -13,10 +13,11 @@ import { getProjectDetailPath } from "@/lib/project-slug";
 
 const PAGE_SIZE = 6;
 
-/** Matches pagination controls: `bg-zinc-800`, `border-white/25`. */
+/** Same surface as `paginationBtnClass`: `bg-zinc-800`, `border-white/25`. */
 const selectClass =
-  "min-h-11 w-full min-w-0 rounded-lg border border-white/25 bg-zinc-800 px-3 py-2.5 text-sm text-white shadow-sm [color-scheme:dark] focus:border-white/35 focus:outline-none focus:ring-2 focus:ring-white/25";
+  "min-h-11 w-full min-w-0 rounded-lg border border-white/25 bg-zinc-800 px-3 py-2.5 text-sm text-white shadow-sm [color-scheme:dark] [&_option]:bg-zinc-800 [&_option]:text-white focus:border-white/35 focus:outline-none focus:ring-2 focus:ring-white/25";
 
+/** Duplicated on `<option>` for agents that ignore parent `select` rules. */
 const optionClassName = "bg-zinc-800 text-white";
 
 const paginationBtnClass =
