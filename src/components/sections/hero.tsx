@@ -37,9 +37,9 @@ const HeroSection = ({
   return (
     <section
       id="hero"
-      className="relative z-0 box-border flex h-dvh flex-col justify-center overflow-x-clip px-4 py-8 sm:px-6"
+      className="relative z-0 box-border flex h-dvh flex-col justify-center overflow-x-clip px-4 py-8 sm:px-6 scale-75 md:scale-100"
     >
-      <div className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
+      <div className="pointer-events-none absolute inset-0 mask-[linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
         <div
           className="absolute inset-0 -z-30 opacity-5"
           style={{ backgroundImage: `url(${grain})` }}
@@ -86,7 +86,9 @@ const HeroSection = ({
             <h3 className="font-serif text-xl text-center mt-4 tracking-wide md:text-2xl">
               {heroRole}
             </h3>
-            <p className="mt-4 text-center text-white/60 md:text-lg">{heroBio}</p>
+            <p className="mt-4 text-center text-white/60 md:text-lg">
+              {heroBio}
+            </p>
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
             <HeroExploreButton
