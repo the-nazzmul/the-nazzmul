@@ -5,6 +5,7 @@ import type {
 } from "@/lib/cms-types";
 import { normalizeProjectsList } from "@/lib/project-normalize";
 import { findProjectIndexBySlug } from "@/lib/project-slug";
+import { unstable_noStore as noStore } from "next/cache";
 export { getBlogPost, getBlogPosts } from "@/lib/blog-cms";
 
 /** Used when CMS_PUBLIC_URL is unset (e.g. Vercel build before env is configured). */
@@ -75,6 +76,7 @@ async function cmsFetch(path: string, tags: string[]): Promise<Response> {
 }
 
 export async function getSitePayload(): Promise<SitePayload> {
+  noStore();
   if (!cmsBase()) {
     return FALLBACK_SITE_PAYLOAD;
   }

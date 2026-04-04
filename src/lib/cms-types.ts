@@ -63,8 +63,9 @@ export type ProjectDTO = {
 export type TestimonialDTO = {
   name: string;
   position: string;
+  /** Sanitized HTML from the CMS rich text editor. */
   testimonial: string;
-  avatar: string;
+  avatar: string | null;
 };
 
 export type TechStackItemDTO = {

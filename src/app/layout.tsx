@@ -6,6 +6,9 @@ import { twMerge } from "tailwind-merge";
 import { getSitePayload } from "@/lib/content";
 import { getSiteMetadataBase } from "@/lib/site-url";
 
+/** CMS-backed `fetch(cache: "no-store")` — avoid static prerender / `DYNAMIC_SERVER_USAGE` noise at build time. */
+export const dynamic = "force-dynamic";
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const calistoga = Calistoga({
   subsets: ["latin"],
