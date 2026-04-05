@@ -5,6 +5,7 @@ import "highlight.js/styles/github-dark.css";
 import { twMerge } from "tailwind-merge";
 import { getSitePayload } from "@/lib/content";
 import { getSiteMetadataBase } from "@/lib/site-url";
+import { Analytics } from "@vercel/analytics/next";
 
 /** CMS-backed `fetch(cache: "no-store")` — avoid static prerender / `DYNAMIC_SERVER_USAGE` noise at build time. */
 export const dynamic = "force-dynamic";
@@ -37,10 +38,11 @@ export default function RootLayout({
         className={twMerge(
           inter.variable,
           calistoga.variable,
-          "antialiased bg-gray-900 text-white font-sans"
+          "antialiased bg-gray-900 text-white font-sans",
         )}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
