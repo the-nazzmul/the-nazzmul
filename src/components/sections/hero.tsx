@@ -37,7 +37,7 @@ const HeroSection = ({
   return (
     <section
       id="hero"
-      className="relative z-0 box-border flex h-dvh flex-col justify-center overflow-x-clip px-4 py-8 sm:px-6 scale-75 md:scale-100"
+      className="relative z-0 box-border flex h-dvh flex-col justify-center overflow-x-clip px-4 py-8 sm:px-6 "
     >
       <div className="pointer-events-none absolute inset-0 mask-[linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
         <div
@@ -54,7 +54,7 @@ const HeroSection = ({
         <div className="hero-ring size-[2020px]"></div>
       </div>
       <div className="relative z-10 w-full">
-        <div className="container">
+        <div className="container scale-90">
           <div className="flex flex-col items-center">
             {heroImageUrl ? (
               <Image
@@ -80,20 +80,20 @@ const HeroSection = ({
             </div>
           </div>
           <div className="max-w-lg mx-auto">
-            <h1 className="font-serif text-3xl text-center mt-8 tracking-wide md:text-5xl">
+            <h1 className="font-serif text-3xl text-center mt-2 md:mt-8 tracking-wide md:text-5xl">
               {heroName}
             </h1>
-            <h3 className="font-serif text-xl text-center mt-4 tracking-wide md:text-2xl">
+            <h3 className="font-serif text-xl text-center mt-2 md:mt-4 tracking-wide md:text-2xl">
               {heroRole}
             </h3>
-            <p className="mt-4 text-center text-white/60 md:text-lg">
+            <p className="mt-2 md:mt-4 text-center text-white/60 text-sm md:text-lg">
               {heroBio}
             </p>
           </div>
-          <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-center items-center mt-4 md:mt-8 gap-4">
             <HeroExploreButton
               label={exploreWorkLabel}
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-white/20 px-6 h-12 text-white transition-colors hover:border-white/35 hover:bg-white/5"
+              className="md:inline-flex items-center gap-2 rounded-xl border-2 border-white/20 px-6 h-12 text-white transition-colors hover:border-white/35 hover:bg-white/5 hidden"
             />
             <Link href={resumeUrl} target="_blank">
               <Button className="inline-flex items-center gap-2 border h-12 px-6 rounded-xl">
