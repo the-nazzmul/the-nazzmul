@@ -1,5 +1,6 @@
 import hljs from "highlight.js";
 
+import { stripRedundantLineNumberPrefixes } from "@/lib/blog-code-normalize";
 import { formatMinifiedCodeIfNeeded } from "@/lib/prettier-format-code";
 
 /** Map `class="language-foo"` aliases to highlight.js language ids */
@@ -63,7 +64,8 @@ export async function buildCodeShellHtml(
   langClass: string
 ): Promise<string> {
   const lang = resolveLanguage(langClass);
-  const displayText = await formatMinifiedCodeIfNeeded(fullText, lang);
+  const stripped = stripRedundantLineNumberPrefixes(fullText);
+  const displayText = await formatMinifiedCodeIfNeeded(stripped, lang);
   const lines = displayText.split(/\r?\n/);
   const rowsHtml = lines
     .map((line, i) => {

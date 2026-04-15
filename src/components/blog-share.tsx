@@ -15,33 +15,26 @@ type ShareChannel =
   | "linkedin"
   | "facebook";
 
-function postShareCount(
-  cmsOrigin: string | null,
-  slug: string,
-  channel: ShareChannel,
-) {
-  if (!cmsOrigin?.trim() || !slug?.trim()) return;
-  const base = cmsOrigin.replace(/\/$/, "");
-  const url = `${base}/api/public/blog/${encodeURIComponent(slug.trim())}/share`;
-  void fetch(url, {
+function postShareCount(slug: string, channel: ShareChannel) {
+  if (!slug?.trim()) return;
+  const path = `/api/blog/${encodeURIComponent(slug.trim())}/share`;
+  void fetch(path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ channel }),
-    mode: "cors",
-    credentials: "omit",
+    credentials: "same-origin",
     keepalive: true,
   }).catch(() => {});
 }
 
 type Props = {
   slug: string;
-  cmsOrigin: string | null;
   url: string;
   title: string;
   description?: string;
 };
 
-export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
+export function BlogShare({ slug, url, title, description }: Props) {
   const [copied, setCopied] = useState(false);
   const canNativeShare = useSyncExternalStore(
     () => () => {},
@@ -54,12 +47,12 @@ export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      postShareCount(cmsOrigin, slug, "copy");
+      postShareCount(slug, "copy");
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
     }
-  }, [url, cmsOrigin, slug]);
+  }, [url, slug]);
 
   const shareNative = useCallback(async () => {
     if (!navigator.share) return;
@@ -69,11 +62,11 @@ export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
         text: description || title,
         url,
       });
-      postShareCount(cmsOrigin, slug, "native");
+      postShareCount(slug, "native");
     } catch {
       /* user cancelled or share failed */
     }
-  }, [url, title, description, cmsOrigin, slug]);
+  }, [url, title, description, slug]);
 
   const enc = encodeURIComponent;
   const twitter = `https://twitter.com/intent/tweet?url=${enc(url)}&text=${enc(title)}`;
@@ -119,7 +112,7 @@ export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
-            onClick={() => postShareCount(cmsOrigin, slug, "twitter")}
+            onClick={() => postShareCount(slug, "twitter")}
           >
             <FaXTwitter />
           </a>
@@ -128,7 +121,7 @@ export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
-            onClick={() => postShareCount(cmsOrigin, slug, "linkedin")}
+            onClick={() => postShareCount(slug, "linkedin")}
           >
             <FaLinkedin />
           </a>
@@ -137,7 +130,7 @@ export function BlogShare({ slug, cmsOrigin, url, title, description }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(actionClass)}
-            onClick={() => postShareCount(cmsOrigin, slug, "facebook")}
+            onClick={() => postShareCount(slug, "facebook")}
           >
             <FaFacebook />
           </a>
