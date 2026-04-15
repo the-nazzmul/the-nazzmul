@@ -28,6 +28,7 @@ export const LANG_ALIASES: Record<string, string> = {
   rb: "ruby",
   rs: "rust",
   go: "go",
+  golang: "go",
   toml: "ini",
 };
 
