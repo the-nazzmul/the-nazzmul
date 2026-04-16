@@ -146,6 +146,18 @@
     @apply text-emerald-400 underline underline-offset-2 hover:text-emerald-300;
   }
 
+  /*
+   * Prevent mobile horizontal overflow from long unbroken tokens (raw URLs, hashes,
+   * CLI args, etc.) in normal prose while keeping code block behavior unchanged.
+   */
+  .blog-content p,
+  .blog-content li,
+  .blog-content blockquote,
+  .blog-content a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   /* Inline code — dark chip, no white fill */
   .blog-content p code,
   .blog-content li code,

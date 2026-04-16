@@ -7,7 +7,11 @@ import ProjectsSection from "@/components/sections/projects";
 import RecentBlogsSection from "@/components/sections/recent-blogs";
 import TapeSection from "@/components/sections/tape";
 import TestimonialsSection from "@/components/sections/testimonials";
-import { getBlogPosts, getFeaturedProjects, getSitePayload } from "@/lib/content";
+import {
+  getBlogPosts,
+  getFeaturedProjects,
+  getSitePayload,
+} from "@/lib/content";
 
 export default async function Home() {
   const [data, recentPosts] = await Promise.all([

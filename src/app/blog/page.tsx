@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { BlogCoverImg } from "@/components/blog/blog-cover-img";
+import { RouteHeaderMenu } from "@/components/route-header-menu";
 import { getBlogPosts, getSitePayload } from "@/lib/content";
 import { getBlogCoverAbsoluteUrl } from "@/lib/site-url";
 import { cn } from "@/lib/utils";
@@ -52,7 +53,13 @@ export default async function BlogIndexPage() {
           <span className="font-serif text-base text-white/90 sm:text-2xl">
             {title}
           </span>
-          <span className="w-24 sm:w-28" aria-hidden />
+          <div className="flex w-24 items-center justify-end sm:w-28">
+            <RouteHeaderMenu
+              heroName={site.siteSettings.heroName}
+              resumeUrl={site.siteSettings.resumeUrl}
+              blogNavLabel={site.siteSettings.blogNavLabel}
+            />
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">

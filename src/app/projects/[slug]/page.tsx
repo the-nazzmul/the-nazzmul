@@ -8,6 +8,7 @@ import {
   CodeSquareIcon,
 } from "lucide-react";
 import { BlogBody } from "@/components/blog-body";
+import { RouteHeaderMenu } from "@/components/route-header-menu";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProjectBySlug, getSitePayload } from "@/lib/content";
@@ -127,18 +128,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           >
             <IoMdArrowRoundBack /> {projectsTitle}
           </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-md transition-opacity hover:opacity-85"
-          >
-            <Image
-              src={site.siteSettings.logoUrl ?? "/the-nazzmul.png"}
-              alt={site.siteSettings.heroName}
-              width={30}
-              height={30}
-            />
-            <span className="sr-only">Home</span>
-          </Link>
+          <RouteHeaderMenu
+            heroName={site.siteSettings.heroName}
+            resumeUrl={site.siteSettings.resumeUrl}
+            blogNavLabel={site.siteSettings.blogNavLabel}
+          />
         </div>
       </header>
 

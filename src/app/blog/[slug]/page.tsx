@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogBody } from "@/components/blog-body";
@@ -7,6 +6,7 @@ import { BlogCoverImg } from "@/components/blog/blog-cover-img";
 import { BlogPostViewTracker } from "@/components/blog-post-view-tracker";
 import { BlogShare } from "@/components/blog-share";
 import { BlogPostTagBadges } from "@/components/blog-post-tags";
+import { RouteHeaderMenu } from "@/components/route-header-menu";
 import { getBlogPost, getSitePayload } from "@/lib/content";
 import {
   getBlogCoverAbsoluteUrl,
@@ -110,18 +110,11 @@ export default async function BlogPostPage({ params }: PageProps) {
           >
             <IoMdArrowRoundBack /> {site.siteSettings.blogSectionTitle}
           </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-md transition-opacity hover:opacity-85"
-          >
-            <Image
-              src={site.siteSettings.logoUrl ?? "/the-nazzmul.png"}
-              alt={site.siteSettings.heroName}
-              width={30}
-              height={30}
-            />
-            <span className="sr-only">Home</span>
-          </Link>
+          <RouteHeaderMenu
+            heroName={site.siteSettings.heroName}
+            resumeUrl={site.siteSettings.resumeUrl}
+            blogNavLabel={site.siteSettings.blogNavLabel}
+          />
         </div>
       </header>
 

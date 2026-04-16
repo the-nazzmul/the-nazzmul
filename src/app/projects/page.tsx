@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Suspense } from "react";
 import { ProjectsDirectory } from "@/components/projects/projects-directory";
+import { RouteHeaderMenu } from "@/components/route-header-menu";
 import { getSitePayload } from "@/lib/content";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
@@ -35,18 +35,13 @@ export default async function ProjectsIndexPage() {
           <span className="font-serif text-base text-white/90 sm:text-2xl">
             {title}
           </span>
-          <Link
-            href="/"
-            className="inline-flex w-24 items-center justify-end sm:w-28"
-            aria-label="Home"
-          >
-            <Image
-              src={siteSettings.logoUrl ?? "/the-nazzmul.png"}
-              alt={siteSettings.heroName}
-              width={30}
-              height={30}
+          <div className="flex w-24 items-center justify-end sm:w-28">
+            <RouteHeaderMenu
+              heroName={siteSettings.heroName}
+              resumeUrl={siteSettings.resumeUrl}
+              blogNavLabel={siteSettings.blogNavLabel}
             />
-          </Link>
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
