@@ -105,11 +105,7 @@ const HeaderSection = ({
               >
                 Home
               </Link>
-              <Link
-                href="#projects"
-                className="nav-item-mobile"
-                onClick={(e) => handleScroll(e, "projects")}
-              >
+              <Link href="/projects" className="nav-item-mobile">
                 Projects
               </Link>
               <Link
