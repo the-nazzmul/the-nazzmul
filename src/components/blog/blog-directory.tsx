@@ -24,14 +24,17 @@ const paginationBtnClass =
 const readMoreClass =
   "inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white";
 
+const BLOG_DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
 function formatDate(iso: string | null) {
   if (!iso) return null;
   try {
-    return new Date(iso).toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    return BLOG_DATE_FORMATTER.format(new Date(iso));
   } catch {
     return null;
   }
@@ -46,7 +49,7 @@ type BlogDirectoryProps = {
   posts: BlogListItemDTO[];
 };
 
-function publishedAtMs(iso: string | null): number {
+function parseIsoDateToMs(iso: string | null): number {
   if (!iso) return Number.NaN;
   const ms = Date.parse(iso);
   return Number.isNaN(ms) ? Number.NaN : ms;
@@ -67,12 +70,12 @@ export function BlogDirectory({ posts }: BlogDirectoryProps) {
   const sorted = useMemo(() => {
     const copy = [...posts];
     copy.sort((a, b) => {
-      const aMs = publishedAtMs(a.publishedAt);
-      const bMs = publishedAtMs(b.publishedAt);
-      const aSafe = Number.isNaN(aMs) ? -Infinity : aMs;
-      const bSafe = Number.isNaN(bMs) ? -Infinity : bMs;
-      if (sortValue === "oldest") return aSafe - bSafe;
-      return bSafe - aSafe;
+      const createdAtMsA = parseIsoDateToMs(a.createdAt ?? a.publishedAt);
+      const createdAtMsB = parseIsoDateToMs(b.createdAt ?? b.publishedAt);
+      const createdAtSafeA = Number.isNaN(createdAtMsA) ? -Infinity : createdAtMsA;
+      const createdAtSafeB = Number.isNaN(createdAtMsB) ? -Infinity : createdAtMsB;
+      if (sortValue === "oldest") return createdAtSafeA - createdAtSafeB;
+      return createdAtSafeB - createdAtSafeA;
     });
     return copy;
   }, [posts, sortValue]);

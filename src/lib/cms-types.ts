@@ -91,6 +91,7 @@ export type BlogListItemDTO = {
   title: string;
   excerpt: string | null;
   coverImageUrl: string | null;
+  createdAt: string | null;
   publishedAt: string | null;
   tags: string[];
 };
@@ -101,6 +102,7 @@ export type BlogPostDTO = {
   excerpt: string | null;
   content: string;
   coverImageUrl: string | null;
+  createdAt: string | null;
   publishedAt: string | null;
   metaTitle: string | null;
   metaDescription: string | null;

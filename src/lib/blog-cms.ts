@@ -46,11 +46,13 @@ function normalizeListItem(raw: unknown): BlogListItemDTO | null {
   const o = raw as Record<string, unknown>;
   const slug = safeStr(o.slug).trim();
   if (!slug) return null;
+  const createdAtRaw = o.createdAt ?? o.created_at ?? null;
   return {
     slug,
     title: safeStr(o.title).trim() || "Untitled",
     excerpt: o.excerpt == null ? null : safeStr(o.excerpt),
     coverImageUrl: o.coverImageUrl == null ? null : safeStr(o.coverImageUrl).trim() || null,
+    createdAt: createdAtRaw == null ? null : safeStr(createdAtRaw),
     publishedAt: o.publishedAt == null ? null : safeStr(o.publishedAt),
     tags: parseBlogTags(o.tags),
   };
@@ -61,12 +63,14 @@ function normalizePost(raw: unknown): BlogPostDTO | null {
   const o = raw as Record<string, unknown>;
   const slug = safeStr(o.slug).trim();
   if (!slug) return null;
+  const createdAtRaw = o.createdAt ?? o.created_at ?? null;
   return {
     slug,
     title: safeStr(o.title).trim() || "Untitled",
     excerpt: o.excerpt == null ? null : safeStr(o.excerpt),
     content: safeStr(o.content),
     coverImageUrl: o.coverImageUrl == null ? null : safeStr(o.coverImageUrl).trim() || null,
+    createdAt: createdAtRaw == null ? null : safeStr(createdAtRaw),
     publishedAt: o.publishedAt == null ? null : safeStr(o.publishedAt),
     metaTitle: o.metaTitle == null ? null : safeStr(o.metaTitle),
     metaDescription: o.metaDescription == null ? null : safeStr(o.metaDescription),
